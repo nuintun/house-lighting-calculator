@@ -1,3 +1,7 @@
+.ui-form {
+  width: 600px;
+  margin: 66px auto;
+}
 .ui-form-item {
   padding: 6px;
 }

@@ -3,13 +3,14 @@
  * (c) 2016 Evan You
  * Released under the MIT License.
  */
-(function (global, factory) {
+(function (global, factory){
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-  typeof define === 'function' && define.amd ? define(factory) :
-  (global.Vue = factory());
-}(this, function () { 'use strict';
+    typeof define === 'function' && define.amd ? define(factory) :
+      (global.Vue = factory());
+}(this, function (){
+  'use strict';
 
-  function set(obj, key, val) {
+  function set(obj, key, val){
     if (hasOwn(obj, key)) {
       obj[key] = val;
       return;
@@ -43,7 +44,7 @@
    * @param {String} key
    */
 
-  function del(obj, key) {
+  function del(obj, key){
     if (!hasOwn(obj, key)) {
       return;
     }
@@ -68,6 +69,7 @@
   }
 
   var hasOwnProperty = Object.prototype.hasOwnProperty;
+
   /**
    * Check whether the object has the property.
    *
@@ -76,7 +78,7 @@
    * @return {Boolean}
    */
 
-  function hasOwn(obj, key) {
+  function hasOwn(obj, key){
     return hasOwnProperty.call(obj, key);
   }
 
@@ -89,7 +91,7 @@
 
   var literalValueRE = /^\s?(true|false|-?[\d\.]+|'[^']*'|"[^"]*")\s?$/;
 
-  function isLiteral(exp) {
+  function isLiteral(exp){
     return literalValueRE.test(exp);
   }
 
@@ -100,7 +102,7 @@
    * @return {Boolean}
    */
 
-  function isReserved(str) {
+  function isReserved(str){
     var c = (str + '').charCodeAt(0);
     return c === 0x24 || c === 0x5F;
   }
@@ -113,7 +115,7 @@
    * @return {String}
    */
 
-  function _toString(value) {
+  function _toString(value){
     return value == null ? '' : value.toString();
   }
 
@@ -125,7 +127,7 @@
    * @return {*|Number}
    */
 
-  function toNumber(value) {
+  function toNumber(value){
     if (typeof value !== 'string') {
       return value;
     } else {
@@ -141,7 +143,7 @@
    * @return {*|Boolean}
    */
 
-  function toBoolean(value) {
+  function toBoolean(value){
     return value === 'true' ? true : value === 'false' ? false : value;
   }
 
@@ -152,7 +154,7 @@
    * @return {String | false}
    */
 
-  function stripQuotes(str) {
+  function stripQuotes(str){
     var a = str.charCodeAt(0);
     var b = str.charCodeAt(str.length - 1);
     return a === b && (a === 0x22 || a === 0x27) ? str.slice(1, -1) : str;
@@ -167,11 +169,11 @@
 
   var camelizeRE = /-(\w)/g;
 
-  function camelize(str) {
+  function camelize(str){
     return str.replace(camelizeRE, toUpper);
   }
 
-  function toUpper(_, c) {
+  function toUpper(_, c){
     return c ? c.toUpperCase() : '';
   }
 
@@ -184,7 +186,7 @@
 
   var hyphenateRE = /([a-z\d])([A-Z])/g;
 
-  function hyphenate(str) {
+  function hyphenate(str){
     return str.replace(hyphenateRE, '$1-$2').toLowerCase();
   }
 
@@ -202,7 +204,7 @@
 
   var classifyRE = /(?:^|[-_\/])(\w)/g;
 
-  function classify(str) {
+  function classify(str){
     return str.replace(classifyRE, toUpper);
   }
 
@@ -214,8 +216,8 @@
    * @return {Function}
    */
 
-  function bind(fn, ctx) {
-    return function (a) {
+  function bind(fn, ctx){
+    return function (a){
       var l = arguments.length;
       return l ? l > 1 ? fn.apply(ctx, arguments) : fn.call(ctx, a) : fn.call(ctx);
     };
@@ -229,7 +231,7 @@
    * @return {Array}
    */
 
-  function toArray(list, start) {
+  function toArray(list, start){
     start = start || 0;
     var i = list.length - start;
     var ret = new Array(i);
@@ -246,7 +248,7 @@
    * @param {Object} from
    */
 
-  function extend(to, from) {
+  function extend(to, from){
     var keys = Object.keys(from);
     var i = keys.length;
     while (i--) {
@@ -264,7 +266,7 @@
    * @return {Boolean}
    */
 
-  function isObject(obj) {
+  function isObject(obj){
     return obj !== null && typeof obj === 'object';
   }
 
@@ -279,7 +281,7 @@
   var toString = Object.prototype.toString;
   var OBJECT_STRING = '[object Object]';
 
-  function isPlainObject(obj) {
+  function isPlainObject(obj){
     return toString.call(obj) === OBJECT_STRING;
   }
 
@@ -301,7 +303,7 @@
    * @param {Boolean} [enumerable]
    */
 
-  function def(obj, key, val, enumerable) {
+  function def(obj, key, val, enumerable){
     Object.defineProperty(obj, key, {
       value: val,
       enumerable: !!enumerable,
@@ -319,9 +321,9 @@
    * @return {Function} - the debounced function
    */
 
-  function _debounce(func, wait) {
+  function _debounce(func, wait){
     var timeout, args, context, timestamp, result;
-    var later = function later() {
+    var later = function later(){
       var last = Date.now() - timestamp;
       if (last < wait && last >= 0) {
         timeout = setTimeout(later, wait - last);
@@ -331,7 +333,7 @@
         if (!timeout) context = args = null;
       }
     };
-    return function () {
+    return function (){
       context = this;
       args = arguments;
       timestamp = Date.now();
@@ -350,7 +352,7 @@
    * @param {*} obj
    */
 
-  function indexOf(arr, obj) {
+  function indexOf(arr, obj){
     var i = arr.length;
     while (i--) {
       if (arr[i] === obj) return i;
@@ -365,13 +367,13 @@
    * @return {Function}
    */
 
-  function cancellable(fn) {
-    var cb = function cb() {
+  function cancellable(fn){
+    var cb = function cb(){
       if (!cb.cancelled) {
         return fn.apply(this, arguments);
       }
     };
-    cb.cancel = function () {
+    cb.cancel = function (){
       cb.cancelled = true;
     };
     return cb;
@@ -386,7 +388,7 @@
    * @return {Boolean}
    */
 
-  function looseEqual(a, b) {
+  function looseEqual(a, b){
     /* eslint-disable eqeqeq */
     return a == b || (isObject(a) && isObject(b) ? JSON.stringify(a) === JSON.stringify(b) : false);
     /* eslint-enable eqeqeq */
@@ -432,11 +434,12 @@
    * @param {Object} ctx
    */
 
-  var nextTick = (function () {
+  var nextTick = (function (){
     var callbacks = [];
     var pending = false;
     var timerFunc;
-    function nextTickHandler() {
+
+    function nextTickHandler(){
       pending = false;
       var copies = callbacks.slice(0);
       callbacks = [];
@@ -453,7 +456,7 @@
       observer.observe(textNode, {
         characterData: true
       });
-      timerFunc = function () {
+      timerFunc = function (){
         counter = (counter + 1) % 2;
         textNode.data = counter;
       };
@@ -464,8 +467,8 @@
       var context = inBrowser ? window : typeof global !== 'undefined' ? global : {};
       timerFunc = context.setImmediate || setTimeout;
     }
-    return function (cb, ctx) {
-      var func = ctx ? function () {
+    return function (cb, ctx){
+      var func = ctx ? function (){
         cb.call(ctx);
       } : cb;
       callbacks.push(func);
@@ -482,21 +485,21 @@
     _Set = Set;
   } else {
     // a non-standard Set polyfill that only works with primitive keys.
-    _Set = function () {
+    _Set = function (){
       this.set = Object.create(null);
     };
-    _Set.prototype.has = function (key) {
+    _Set.prototype.has = function (key){
       return this.set[key] !== undefined;
     };
-    _Set.prototype.add = function (key) {
+    _Set.prototype.add = function (key){
       this.set[key] = 1;
     };
-    _Set.prototype.clear = function () {
+    _Set.prototype.clear = function (){
       this.set = Object.create(null);
     };
   }
 
-  function Cache(limit) {
+  function Cache(limit){
     this.size = 0;
     this.limit = limit;
     this.head = this.tail = undefined;
@@ -516,7 +519,7 @@
    * @return {Entry|undefined}
    */
 
-  p.put = function (key, value) {
+  p.put = function (key, value){
     var removed;
     if (this.size === this.limit) {
       removed = this.shift();
@@ -548,7 +551,7 @@
    * cache was empty.
    */
 
-  p.shift = function () {
+  p.shift = function (){
     var entry = this.head;
     if (entry) {
       this.head = this.head.newer;
@@ -569,7 +572,7 @@
    * @return {Entry|*}
    */
 
-  p.get = function (key, returnEntry) {
+  p.get = function (key, returnEntry){
     var entry = this._keymap[key];
     if (entry === undefined) return;
     if (entry === this.tail) {
@@ -617,11 +620,12 @@
   var curly;
   var square;
   var paren;
+
   /**
    * Push a filter to the current directive object
    */
 
-  function pushFilter() {
+  function pushFilter(){
     var exp = str.slice(lastFilterIndex, i).trim();
     var filter;
     if (exp) {
@@ -645,7 +649,7 @@
    * @return {Object}
    */
 
-  function processFilterArg(arg) {
+  function processFilterArg(arg){
     if (reservedArgRE.test(arg)) {
       return {
         value: toNumber(arg),
@@ -679,7 +683,7 @@
    * @return {Object}
    */
 
-  function parseDirective(s) {
+  function parseDirective(s){
     var hit = cache$1.get(s);
     if (hit) {
       return hit;
@@ -702,7 +706,7 @@
         // check double quote
         if (c === 0x22 && prev !== 0x5C) inDouble = !inDouble;
       } else if (c === 0x7C && // pipe
-      str.charCodeAt(i + 1) !== 0x7C && str.charCodeAt(i - 1) !== 0x7C) {
+        str.charCodeAt(i + 1) !== 0x7C && str.charCodeAt(i - 1) !== 0x7C) {
         if (dir.expression == null) {
           // first filter, end of expression
           lastFilterIndex = i + 1;
@@ -714,21 +718,29 @@
       } else {
         switch (c) {
           case 0x22:
-            inDouble = true;break; // "
+            inDouble = true;
+            break; // "
           case 0x27:
-            inSingle = true;break; // '
+            inSingle = true;
+            break; // '
           case 0x28:
-            paren++;break; // (
+            paren++;
+            break; // (
           case 0x29:
-            paren--;break; // )
+            paren--;
+            break; // )
           case 0x5B:
-            square++;break; // [
+            square++;
+            break; // [
           case 0x5D:
-            square--;break; // ]
+            square--;
+            break; // ]
           case 0x7B:
-            curly++;break; // {
+            curly++;
+            break; // {
           case 0x7D:
-            curly--;break; // }
+            curly--;
+            break; // }
         }
       }
     }
@@ -743,7 +755,7 @@
     return dir;
   }
 
-var directive = Object.freeze({
+  var directive = Object.freeze({
     parseDirective: parseDirective
   });
 
@@ -751,6 +763,7 @@ var directive = Object.freeze({
   var cache = undefined;
   var tagRE = undefined;
   var htmlRE = undefined;
+
   /**
    * Escape a string so it can be used in a RegExp
    * constructor.
@@ -758,11 +771,11 @@ var directive = Object.freeze({
    * @param {String} str
    */
 
-  function escapeRegex(str) {
+  function escapeRegex(str){
     return str.replace(regexEscapeRE, '\\$&');
   }
 
-  function compileRegex() {
+  function compileRegex(){
     var open = escapeRegex(config.delimiters[0]);
     var close = escapeRegex(config.delimiters[1]);
     var unsafeOpen = escapeRegex(config.unsafeDelimiters[0]);
@@ -784,7 +797,7 @@ var directive = Object.freeze({
    *               - {Boolean} [oneTime]
    */
 
-  function parseText(text) {
+  function parseText(text){
     if (!cache) {
       compileRegex();
     }
@@ -841,9 +854,9 @@ var directive = Object.freeze({
    * @return {String}
    */
 
-  function tokensToExp(tokens, vm) {
+  function tokensToExp(tokens, vm){
     if (tokens.length > 1) {
-      return tokens.map(function (token) {
+      return tokens.map(function (token){
         return formatToken(token, vm);
       }).join('+');
     } else {
@@ -860,7 +873,7 @@ var directive = Object.freeze({
    * @return {String}
    */
 
-  function formatToken(token, vm, single) {
+  function formatToken(token, vm, single){
     return token.tag ? token.oneTime && vm ? '"' + vm.$eval(token.value) + '"' : inlineFilters(token.value, single) : '"' + token.value + '"';
   }
 
@@ -878,7 +891,8 @@ var directive = Object.freeze({
    */
 
   var filterRE = /[^|]\|[^|]/;
-  function inlineFilters(exp, single) {
+
+  function inlineFilters(exp, single){
     if (!filterRE.test(exp)) {
       return single ? exp : '(' + exp + ')';
     } else {
@@ -887,14 +901,14 @@ var directive = Object.freeze({
         return '(' + exp + ')';
       } else {
         return 'this._applyFilters(' + dir.expression + // value
-        ',null,' + // oldValue (null for read)
-        JSON.stringify(dir.filters) + // filter descriptors
-        ',false)'; // write?
+          ',null,' + // oldValue (null for read)
+          JSON.stringify(dir.filters) + // filter descriptors
+          ',false)'; // write?
       }
     }
   }
 
-var text = Object.freeze({
+  var text = Object.freeze({
     compileRegex: compileRegex,
     parseText: parseText,
     tokensToExp: tokensToExp
@@ -976,17 +990,18 @@ var text = Object.freeze({
     _maxUpdateCount: 100
 
   }, {
-    delimiters: { /**
-                   * Interpolation delimiters. Changing these would trigger
-                   * the text parser to re-compile the regular expressions.
-                   *
-                   * @type {Array<String>}
-                   */
+    delimiters: {
+      /**
+       * Interpolation delimiters. Changing these would trigger
+       * the text parser to re-compile the regular expressions.
+       *
+       * @type {Array<String>}
+       */
 
-      get: function get() {
+      get: function get(){
         return delimiters;
       },
-      set: function set(val) {
+      set: function set(val){
         delimiters = val;
         compileRegex();
       },
@@ -994,10 +1009,10 @@ var text = Object.freeze({
       enumerable: true
     },
     unsafeDelimiters: {
-      get: function get() {
+      get: function get(){
         return unsafeDelimiters;
       },
-      set: function set(val) {
+      set: function set(val){
         unsafeDelimiters = val;
         compileRegex();
       },
@@ -1010,16 +1025,16 @@ var text = Object.freeze({
   var formatComponentName = undefined;
 
   if ('development' !== 'production') {
-    (function () {
+    (function (){
       var hasConsole = typeof console !== 'undefined';
 
-      warn = function (msg, vm) {
+      warn = function (msg, vm){
         if (hasConsole && !config.silent) {
           console.error('[Vue warn]: ' + msg + (vm ? formatComponentName(vm) : ''));
         }
       };
 
-      formatComponentName = function (vm) {
+      formatComponentName = function (vm){
         var name = vm._isVue ? vm.$options.name : vm.name;
         return name ? ' (found in component: <' + hyphenate(name) + '>)' : '';
       };
@@ -1035,8 +1050,8 @@ var text = Object.freeze({
    * @param {Function} [cb]
    */
 
-  function appendWithTransition(el, target, vm, cb) {
-    applyTransition(el, 1, function () {
+  function appendWithTransition(el, target, vm, cb){
+    applyTransition(el, 1, function (){
       target.appendChild(el);
     }, vm, cb);
   }
@@ -1050,8 +1065,8 @@ var text = Object.freeze({
    * @param {Function} [cb]
    */
 
-  function beforeWithTransition(el, target, vm, cb) {
-    applyTransition(el, 1, function () {
+  function beforeWithTransition(el, target, vm, cb){
+    applyTransition(el, 1, function (){
       before(el, target);
     }, vm, cb);
   }
@@ -1064,8 +1079,8 @@ var text = Object.freeze({
    * @param {Function} [cb]
    */
 
-  function removeWithTransition(el, vm, cb) {
-    applyTransition(el, -1, function () {
+  function removeWithTransition(el, vm, cb){
+    applyTransition(el, -1, function (){
       remove(el);
     }, vm, cb);
   }
@@ -1082,18 +1097,18 @@ var text = Object.freeze({
    * @param {Function} [cb]
    */
 
-  function applyTransition(el, direction, op, vm, cb) {
+  function applyTransition(el, direction, op, vm, cb){
     var transition = el.__v_trans;
     if (!transition ||
-    // skip if there are no js hooks and CSS transition is
-    // not supported
-    !transition.hooks && !transitionEndEvent ||
-    // skip transitions for initial compile
-    !vm._isCompiled ||
-    // if the vm is being manipulated by a parent directive
-    // during the parent's compilation phase, skip the
-    // animation.
-    vm.$parent && !vm.$parent._isCompiled) {
+      // skip if there are no js hooks and CSS transition is
+      // not supported
+      !transition.hooks && !transitionEndEvent ||
+      // skip transitions for initial compile
+      !vm._isCompiled ||
+      // if the vm is being manipulated by a parent directive
+      // during the parent's compilation phase, skip the
+      // animation.
+      vm.$parent && !vm.$parent._isCompiled) {
       op();
       if (cb) cb();
       return;
@@ -1102,7 +1117,7 @@ var text = Object.freeze({
     transition[action](op, cb);
   }
 
-var transition = Object.freeze({
+  var transition = Object.freeze({
     appendWithTransition: appendWithTransition,
     beforeWithTransition: beforeWithTransition,
     removeWithTransition: removeWithTransition,
@@ -1116,7 +1131,7 @@ var transition = Object.freeze({
    * @return {Element}
    */
 
-  function query(el) {
+  function query(el){
     if (typeof el === 'string') {
       var selector = el;
       el = document.querySelector(el);
@@ -1139,7 +1154,7 @@ var transition = Object.freeze({
    * @return {Boolean}
    */
 
-  function inDoc(node) {
+  function inDoc(node){
     if (!node) return false;
     var doc = node.ownerDocument.documentElement;
     var parent = node.parentNode;
@@ -1153,7 +1168,7 @@ var transition = Object.freeze({
    * @param {String} _attr
    */
 
-  function getAttr(node, _attr) {
+  function getAttr(node, _attr){
     var val = node.getAttribute(_attr);
     if (val !== null) {
       node.removeAttribute(_attr);
@@ -1169,7 +1184,7 @@ var transition = Object.freeze({
    * @return {String|null}
    */
 
-  function getBindAttr(node, name) {
+  function getBindAttr(node, name){
     var val = getAttr(node, ':' + name);
     if (val === null) {
       val = getAttr(node, 'v-bind:' + name);
@@ -1185,7 +1200,7 @@ var transition = Object.freeze({
    * @return {Boolean}
    */
 
-  function hasBindAttr(node, name) {
+  function hasBindAttr(node, name){
     return node.hasAttribute(name) || node.hasAttribute(':' + name) || node.hasAttribute('v-bind:' + name);
   }
 
@@ -1196,7 +1211,7 @@ var transition = Object.freeze({
    * @param {Element} target
    */
 
-  function before(el, target) {
+  function before(el, target){
     target.parentNode.insertBefore(el, target);
   }
 
@@ -1207,7 +1222,7 @@ var transition = Object.freeze({
    * @param {Element} target
    */
 
-  function after(el, target) {
+  function after(el, target){
     if (target.nextSibling) {
       before(el, target.nextSibling);
     } else {
@@ -1221,7 +1236,7 @@ var transition = Object.freeze({
    * @param {Element} el
    */
 
-  function remove(el) {
+  function remove(el){
     el.parentNode.removeChild(el);
   }
 
@@ -1232,7 +1247,7 @@ var transition = Object.freeze({
    * @param {Element} target
    */
 
-  function prepend(el, target) {
+  function prepend(el, target){
     if (target.firstChild) {
       before(el, target.firstChild);
     } else {
@@ -1247,7 +1262,7 @@ var transition = Object.freeze({
    * @param {Element} el
    */
 
-  function replace(target, el) {
+  function replace(target, el){
     var parent = target.parentNode;
     if (parent) {
       parent.replaceChild(el, target);
@@ -1263,7 +1278,7 @@ var transition = Object.freeze({
    * @param {Boolean} [useCapture]
    */
 
-  function on(el, event, cb, useCapture) {
+  function on(el, event, cb, useCapture){
     el.addEventListener(event, cb, useCapture);
   }
 
@@ -1275,7 +1290,7 @@ var transition = Object.freeze({
    * @param {Function} cb
    */
 
-  function off(el, event, cb) {
+  function off(el, event, cb){
     el.removeEventListener(event, cb);
   }
 
@@ -1287,7 +1302,7 @@ var transition = Object.freeze({
    * @return {String}
    */
 
-  function getClass(el) {
+  function getClass(el){
     var classname = el.className;
     if (typeof classname === 'object') {
       classname = classname.baseVal || '';
@@ -1305,7 +1320,7 @@ var transition = Object.freeze({
    * @param {String} cls
    */
 
-  function setClass(el, cls) {
+  function setClass(el, cls){
     /* istanbul ignore if */
     if (isIE9 && !/svg$/.test(el.namespaceURI)) {
       el.className = cls;
@@ -1321,7 +1336,7 @@ var transition = Object.freeze({
    * @param {String} cls
    */
 
-  function addClass(el, cls) {
+  function addClass(el, cls){
     if (el.classList) {
       el.classList.add(cls);
     } else {
@@ -1339,7 +1354,7 @@ var transition = Object.freeze({
    * @param {String} cls
    */
 
-  function removeClass(el, cls) {
+  function removeClass(el, cls){
     if (el.classList) {
       el.classList.remove(cls);
     } else {
@@ -1364,7 +1379,7 @@ var transition = Object.freeze({
    * @return {Element|DocumentFragment}
    */
 
-  function extractContent(el, asFragment) {
+  function extractContent(el, asFragment){
     var child;
     var rawContent;
     /* istanbul ignore if */
@@ -1390,7 +1405,7 @@ var transition = Object.freeze({
    * @param {Node} node
    */
 
-  function trimNode(node) {
+  function trimNode(node){
     var child;
     /* eslint-disable no-sequences */
     while ((child = node.firstChild, isTrimmable(child))) {
@@ -1402,7 +1417,7 @@ var transition = Object.freeze({
     /* eslint-enable no-sequences */
   }
 
-  function isTrimmable(node) {
+  function isTrimmable(node){
     return node && (node.nodeType === 3 && !node.data.trim() || node.nodeType === 8);
   }
 
@@ -1414,7 +1429,7 @@ var transition = Object.freeze({
    * @param {Element} el
    */
 
-  function isTemplate(el) {
+  function isTemplate(el){
     return el.tagName && el.tagName.toLowerCase() === 'template';
   }
 
@@ -1436,7 +1451,7 @@ var transition = Object.freeze({
    * @return {Comment|Text}
    */
 
-  function createAnchor(content, persist) {
+  function createAnchor(content, persist){
     var anchor = config.debug ? document.createComment(content) : document.createTextNode(persist ? ' ' : '');
     anchor.__v_anchor = true;
     return anchor;
@@ -1451,7 +1466,7 @@ var transition = Object.freeze({
 
   var refRE = /^v-ref:/;
 
-  function findRef(node) {
+  function findRef(node){
     if (node.hasAttributes()) {
       var attrs = node.attributes;
       for (var i = 0, l = attrs.length; i < l; i++) {
@@ -1471,7 +1486,7 @@ var transition = Object.freeze({
    * @param {Function} op
    */
 
-  function mapNodeRange(node, end, op) {
+  function mapNodeRange(node, end, op){
     var next;
     while (node !== end) {
       next = node.nextSibling;
@@ -1493,16 +1508,16 @@ var transition = Object.freeze({
    * @param {Function} cb
    */
 
-  function removeNodeRange(start, end, vm, frag, cb) {
+  function removeNodeRange(start, end, vm, frag, cb){
     var done = false;
     var removed = 0;
     var nodes = [];
-    mapNodeRange(start, end, function (node) {
+    mapNodeRange(start, end, function (node){
       if (node === end) done = true;
       nodes.push(node);
       removeWithTransition(node, vm, onRemoved);
     });
-    function onRemoved() {
+    function onRemoved(){
       removed++;
       if (done && removed >= nodes.length) {
         for (var i = 0; i < nodes.length; i++) {
@@ -1520,7 +1535,7 @@ var transition = Object.freeze({
    * @return {Boolean}
    */
 
-  function isFragment(node) {
+  function isFragment(node){
     return node && node.nodeType === 11;
   }
 
@@ -1532,7 +1547,7 @@ var transition = Object.freeze({
    * @return {String}
    */
 
-  function getOuterHTML(el) {
+  function getOuterHTML(el){
     if (el.outerHTML) {
       return el.outerHTML;
     } else {
@@ -1547,7 +1562,7 @@ var transition = Object.freeze({
 
   var isUnknownElement = undefined;
   if ('development' !== 'production') {
-    isUnknownElement = function (el, tag) {
+    isUnknownElement = function (el, tag){
       if (tag.indexOf('-') > -1) {
         // http://stackoverflow.com/a/28210364/1070244
         return el.constructor === window.HTMLUnknownElement || el.constructor === window.HTMLElement;
@@ -1570,7 +1585,7 @@ var transition = Object.freeze({
    * @return {Object|undefined}
    */
 
-  function checkComponentAttr(el, options) {
+  function checkComponentAttr(el, options){
     var tag = el.tagName.toLowerCase();
     var hasAttrs = el.hasAttributes();
     if (!commonTagRE.test(tag) && !reservedTagRE.test(tag)) {
@@ -1602,7 +1617,7 @@ var transition = Object.freeze({
    * @return {Object|undefined}
    */
 
-  function getIsBinding(el, options) {
+  function getIsBinding(el, options){
     // dynamic syntax
     var exp = el.getAttribute('is');
     if (exp != null) {
@@ -1636,7 +1651,7 @@ var transition = Object.freeze({
    * Helper that recursively merges two data objects together.
    */
 
-  function mergeData(to, from) {
+  function mergeData(to, from){
     var key, toVal, fromVal;
     for (key in from) {
       toVal = to[key];
@@ -1654,7 +1669,7 @@ var transition = Object.freeze({
    * Data
    */
 
-  strats.data = function (parentVal, childVal, vm) {
+  strats.data = function (parentVal, childVal, vm){
     if (!vm) {
       // in a Vue.extend merge, both should be functions
       if (!childVal) {
@@ -1672,11 +1687,11 @@ var transition = Object.freeze({
       // merged result of both functions... no need to
       // check if parentVal is a function here because
       // it has to be a function to pass previous merges.
-      return function mergedDataFn() {
+      return function mergedDataFn(){
         return mergeData(childVal.call(this), parentVal.call(this));
       };
     } else if (parentVal || childVal) {
-      return function mergedInstanceDataFn() {
+      return function mergedInstanceDataFn(){
         // instance merge
         var instanceData = typeof childVal === 'function' ? childVal.call(vm) : childVal;
         var defaultData = typeof parentVal === 'function' ? parentVal.call(vm) : undefined;
@@ -1693,7 +1708,7 @@ var transition = Object.freeze({
    * El
    */
 
-  strats.el = function (parentVal, childVal, vm) {
+  strats.el = function (parentVal, childVal, vm){
     if (!vm && childVal && typeof childVal !== 'function') {
       'development' !== 'production' && warn('The "el" option should be a function ' + 'that returns a per-instance value in component ' + 'definitions.', vm);
       return;
@@ -1707,7 +1722,7 @@ var transition = Object.freeze({
    * Hooks and param attributes are merged as arrays.
    */
 
-  strats.init = strats.created = strats.ready = strats.attached = strats.detached = strats.beforeCompile = strats.compiled = strats.beforeDestroy = strats.destroyed = strats.activate = function (parentVal, childVal) {
+  strats.init = strats.created = strats.ready = strats.attached = strats.detached = strats.beforeCompile = strats.compiled = strats.beforeDestroy = strats.destroyed = strats.activate = function (parentVal, childVal){
     return childVal ? parentVal ? parentVal.concat(childVal) : isArray(childVal) ? childVal : [childVal] : parentVal;
   };
 
@@ -1719,12 +1734,12 @@ var transition = Object.freeze({
    * options and parent options.
    */
 
-  function mergeAssets(parentVal, childVal) {
+  function mergeAssets(parentVal, childVal){
     var res = Object.create(parentVal || null);
     return childVal ? extend(res, guardArrayAssets(childVal)) : res;
   }
 
-  config._assetTypes.forEach(function (type) {
+  config._assetTypes.forEach(function (type){
     strats[type + 's'] = mergeAssets;
   });
 
@@ -1735,7 +1750,7 @@ var transition = Object.freeze({
    * another, so we merge them as arrays.
    */
 
-  strats.watch = strats.events = function (parentVal, childVal) {
+  strats.watch = strats.events = function (parentVal, childVal){
     if (!childVal) return parentVal;
     if (!parentVal) return childVal;
     var ret = {};
@@ -1755,7 +1770,7 @@ var transition = Object.freeze({
    * Other object hashes.
    */
 
-  strats.props = strats.methods = strats.computed = function (parentVal, childVal) {
+  strats.props = strats.methods = strats.computed = function (parentVal, childVal){
     if (!childVal) return parentVal;
     if (!parentVal) return childVal;
     var ret = Object.create(null);
@@ -1768,7 +1783,7 @@ var transition = Object.freeze({
    * Default strategy.
    */
 
-  var defaultStrat = function defaultStrat(parentVal, childVal) {
+  var defaultStrat = function defaultStrat(parentVal, childVal){
     return childVal === undefined ? parentVal : childVal;
   };
 
@@ -1779,7 +1794,7 @@ var transition = Object.freeze({
    * @param {Object} options
    */
 
-  function guardComponents(options) {
+  function guardComponents(options){
     if (options.components) {
       var components = options.components = guardArrayAssets(options.components);
       var ids = Object.keys(components);
@@ -1813,7 +1828,7 @@ var transition = Object.freeze({
    * @param {Object} options
    */
 
-  function guardProps(options) {
+  function guardProps(options){
     var props = options.props;
     var i, val;
     if (isArray(props)) {
@@ -1847,7 +1862,7 @@ var transition = Object.freeze({
    * @return {Object}
    */
 
-  function guardArrayAssets(assets) {
+  function guardArrayAssets(assets){
     if (isArray(assets)) {
       var res = {};
       var i = assets.length;
@@ -1876,7 +1891,7 @@ var transition = Object.freeze({
    *                     an instantiation merge.
    */
 
-  function mergeOptions(parent, child, vm) {
+  function mergeOptions(parent, child, vm){
     guardComponents(child);
     guardProps(child);
     if ('development' !== 'production') {
@@ -1902,10 +1917,11 @@ var transition = Object.freeze({
         mergeField(key);
       }
     }
-    function mergeField(key) {
+    function mergeField(key){
       var strat = strats[key] || defaultStrat;
       options[key] = strat(parent[key], child[key], vm, key);
     }
+
     return options;
   }
 
@@ -1921,7 +1937,7 @@ var transition = Object.freeze({
    * @return {Object|Function}
    */
 
-  function resolveAsset(options, type, id, warnMissing) {
+  function resolveAsset(options, type, id, warnMissing){
     /* istanbul ignore if */
     if (typeof id !== 'string') {
       return;
@@ -1929,10 +1945,10 @@ var transition = Object.freeze({
     var assets = options[type];
     var camelizedId;
     var res = assets[id] ||
-    // camelCase ID
-    assets[camelizedId = camelize(id)] ||
-    // Pascal Case ID
-    assets[camelizedId.charAt(0).toUpperCase() + camelizedId.slice(1)];
+      // camelCase ID
+      assets[camelizedId = camelize(id)] ||
+      // Pascal Case ID
+      assets[camelizedId.charAt(0).toUpperCase() + camelizedId.slice(1)];
     if ('development' !== 'production' && warnMissing && !res) {
       warn('Failed to resolve ' + type.slice(0, -1) + ': ' + id, options);
     }
@@ -1947,7 +1963,7 @@ var transition = Object.freeze({
    *
    * @constructor
    */
-  function Dep() {
+  function Dep(){
     this.id = uid$1++;
     this.subs = [];
   }
@@ -1963,7 +1979,7 @@ var transition = Object.freeze({
    * @param {Directive} sub
    */
 
-  Dep.prototype.addSub = function (sub) {
+  Dep.prototype.addSub = function (sub){
     this.subs.push(sub);
   };
 
@@ -1973,7 +1989,7 @@ var transition = Object.freeze({
    * @param {Directive} sub
    */
 
-  Dep.prototype.removeSub = function (sub) {
+  Dep.prototype.removeSub = function (sub){
     this.subs.$remove(sub);
   };
 
@@ -1981,7 +1997,7 @@ var transition = Object.freeze({
    * Add self as a dependency to the target watcher.
    */
 
-  Dep.prototype.depend = function () {
+  Dep.prototype.depend = function (){
     Dep.target.addDep(this);
   };
 
@@ -1989,7 +2005,7 @@ var transition = Object.freeze({
    * Notify all subscribers of a new value.
    */
 
-  Dep.prototype.notify = function () {
+  Dep.prototype.notify = function (){
     // stablize the subscriber list first
     var subs = toArray(this.subs);
     for (var i = 0, l = subs.length; i < l; i++) {
@@ -2004,10 +2020,11 @@ var transition = Object.freeze({
    * Intercept mutating methods and emit events
    */
 
-  ;['push', 'pop', 'shift', 'unshift', 'splice', 'sort', 'reverse'].forEach(function (method) {
+    ;
+  ['push', 'pop', 'shift', 'unshift', 'splice', 'sort', 'reverse'].forEach(function (method){
     // cache original method
     var original = arrayProto[method];
-    def(arrayMethods, method, function mutator() {
+    def(arrayMethods, method, function mutator(){
       // avoid leaking arguments:
       // http://jsperf.com/closure-with-arguments
       var i = arguments.length;
@@ -2045,7 +2062,7 @@ var transition = Object.freeze({
    * @return {*} - replaced element
    */
 
-  def(arrayProto, '$set', function $set(index, val) {
+  def(arrayProto, '$set', function $set(index, val){
     if (index >= this.length) {
       this.length = Number(index) + 1;
     }
@@ -2058,7 +2075,7 @@ var transition = Object.freeze({
    * @param {*} item
    */
 
-  def(arrayProto, '$remove', function $remove(item) {
+  def(arrayProto, '$remove', function $remove(item){
     /* istanbul ignore if */
     if (!this.length) return;
     var index = indexOf(this, item);
@@ -2081,7 +2098,7 @@ var transition = Object.freeze({
 
   var shouldConvert = true;
 
-  function withoutConversion(fn) {
+  function withoutConversion(fn){
     shouldConvert = false;
     fn();
     shouldConvert = true;
@@ -2097,7 +2114,7 @@ var transition = Object.freeze({
    * @constructor
    */
 
-  function Observer(value) {
+  function Observer(value){
     this.value = value;
     this.dep = new Dep();
     def(value, '__ob__', this);
@@ -2120,7 +2137,7 @@ var transition = Object.freeze({
    * @param {Object} obj
    */
 
-  Observer.prototype.walk = function (obj) {
+  Observer.prototype.walk = function (obj){
     var keys = Object.keys(obj);
     for (var i = 0, l = keys.length; i < l; i++) {
       this.convert(keys[i], obj[keys[i]]);
@@ -2133,7 +2150,7 @@ var transition = Object.freeze({
    * @param {Array} items
    */
 
-  Observer.prototype.observeArray = function (items) {
+  Observer.prototype.observeArray = function (items){
     for (var i = 0, l = items.length; i < l; i++) {
       observe(items[i]);
     }
@@ -2147,7 +2164,7 @@ var transition = Object.freeze({
    * @param {*} val
    */
 
-  Observer.prototype.convert = function (key, val) {
+  Observer.prototype.convert = function (key, val){
     defineReactive(this.value, key, val);
   };
 
@@ -2160,7 +2177,7 @@ var transition = Object.freeze({
    * @param {Vue} vm
    */
 
-  Observer.prototype.addVm = function (vm) {
+  Observer.prototype.addVm = function (vm){
     (this.vms || (this.vms = [])).push(vm);
   };
 
@@ -2171,7 +2188,7 @@ var transition = Object.freeze({
    * @param {Vue} vm
    */
 
-  Observer.prototype.removeVm = function (vm) {
+  Observer.prototype.removeVm = function (vm){
     this.vms.$remove(vm);
   };
 
@@ -2185,7 +2202,7 @@ var transition = Object.freeze({
    * @param {Object} src
    */
 
-  function protoAugment(target, src) {
+  function protoAugment(target, src){
     /* eslint-disable no-proto */
     target.__proto__ = src;
     /* eslint-enable no-proto */
@@ -2199,7 +2216,7 @@ var transition = Object.freeze({
    * @param {Object} proto
    */
 
-  function copyAugment(target, src, keys) {
+  function copyAugment(target, src, keys){
     for (var i = 0, l = keys.length; i < l; i++) {
       var key = keys[i];
       def(target, key, src[key]);
@@ -2217,7 +2234,7 @@ var transition = Object.freeze({
    * @static
    */
 
-  function observe(value, vm) {
+  function observe(value, vm){
     if (!value || typeof value !== 'object') {
       return;
     }
@@ -2241,7 +2258,7 @@ var transition = Object.freeze({
    * @param {*} val
    */
 
-  function defineReactive(obj, key, val) {
+  function defineReactive(obj, key, val){
     var dep = new Dep();
 
     var property = Object.getOwnPropertyDescriptor(obj, key);
@@ -2257,7 +2274,7 @@ var transition = Object.freeze({
     Object.defineProperty(obj, key, {
       enumerable: true,
       configurable: true,
-      get: function reactiveGetter() {
+      get: function reactiveGetter(){
         var value = getter ? getter.call(obj) : val;
         if (Dep.target) {
           dep.depend();
@@ -2273,7 +2290,7 @@ var transition = Object.freeze({
         }
         return value;
       },
-      set: function reactiveSetter(newVal) {
+      set: function reactiveSetter(newVal){
         var value = getter ? getter.call(obj) : val;
         if (newVal === value) {
           return;
@@ -2289,81 +2306,79 @@ var transition = Object.freeze({
     });
   }
 
-
-
   var util = Object.freeze({
-  	defineReactive: defineReactive,
-  	set: set,
-  	del: del,
-  	hasOwn: hasOwn,
-  	isLiteral: isLiteral,
-  	isReserved: isReserved,
-  	_toString: _toString,
-  	toNumber: toNumber,
-  	toBoolean: toBoolean,
-  	stripQuotes: stripQuotes,
-  	camelize: camelize,
-  	hyphenate: hyphenate,
-  	classify: classify,
-  	bind: bind,
-  	toArray: toArray,
-  	extend: extend,
-  	isObject: isObject,
-  	isPlainObject: isPlainObject,
-  	def: def,
-  	debounce: _debounce,
-  	indexOf: indexOf,
-  	cancellable: cancellable,
-  	looseEqual: looseEqual,
-  	isArray: isArray,
-  	hasProto: hasProto,
-  	inBrowser: inBrowser,
-  	devtools: devtools,
-  	isIE9: isIE9,
-  	isAndroid: isAndroid,
-  	isIos: isIos,
-  	isWechat: isWechat,
-  	get transitionProp () { return transitionProp; },
-  	get transitionEndEvent () { return transitionEndEvent; },
-  	get animationProp () { return animationProp; },
-  	get animationEndEvent () { return animationEndEvent; },
-  	nextTick: nextTick,
-  	get _Set () { return _Set; },
-  	query: query,
-  	inDoc: inDoc,
-  	getAttr: getAttr,
-  	getBindAttr: getBindAttr,
-  	hasBindAttr: hasBindAttr,
-  	before: before,
-  	after: after,
-  	remove: remove,
-  	prepend: prepend,
-  	replace: replace,
-  	on: on,
-  	off: off,
-  	setClass: setClass,
-  	addClass: addClass,
-  	removeClass: removeClass,
-  	extractContent: extractContent,
-  	trimNode: trimNode,
-  	isTemplate: isTemplate,
-  	createAnchor: createAnchor,
-  	findRef: findRef,
-  	mapNodeRange: mapNodeRange,
-  	removeNodeRange: removeNodeRange,
-  	isFragment: isFragment,
-  	getOuterHTML: getOuterHTML,
-  	mergeOptions: mergeOptions,
-  	resolveAsset: resolveAsset,
-  	checkComponentAttr: checkComponentAttr,
-  	commonTagRE: commonTagRE,
-  	reservedTagRE: reservedTagRE,
-  	get warn () { return warn; }
+    defineReactive: defineReactive,
+    set: set,
+    del: del,
+    hasOwn: hasOwn,
+    isLiteral: isLiteral,
+    isReserved: isReserved,
+    _toString: _toString,
+    toNumber: toNumber,
+    toBoolean: toBoolean,
+    stripQuotes: stripQuotes,
+    camelize: camelize,
+    hyphenate: hyphenate,
+    classify: classify,
+    bind: bind,
+    toArray: toArray,
+    extend: extend,
+    isObject: isObject,
+    isPlainObject: isPlainObject,
+    def: def,
+    debounce: _debounce,
+    indexOf: indexOf,
+    cancellable: cancellable,
+    looseEqual: looseEqual,
+    isArray: isArray,
+    hasProto: hasProto,
+    inBrowser: inBrowser,
+    devtools: devtools,
+    isIE9: isIE9,
+    isAndroid: isAndroid,
+    isIos: isIos,
+    isWechat: isWechat,
+    get transitionProp(){ return transitionProp; },
+    get transitionEndEvent(){ return transitionEndEvent; },
+    get animationProp(){ return animationProp; },
+    get animationEndEvent(){ return animationEndEvent; },
+    nextTick: nextTick,
+    get _Set(){ return _Set; },
+    query: query,
+    inDoc: inDoc,
+    getAttr: getAttr,
+    getBindAttr: getBindAttr,
+    hasBindAttr: hasBindAttr,
+    before: before,
+    after: after,
+    remove: remove,
+    prepend: prepend,
+    replace: replace,
+    on: on,
+    off: off,
+    setClass: setClass,
+    addClass: addClass,
+    removeClass: removeClass,
+    extractContent: extractContent,
+    trimNode: trimNode,
+    isTemplate: isTemplate,
+    createAnchor: createAnchor,
+    findRef: findRef,
+    mapNodeRange: mapNodeRange,
+    removeNodeRange: removeNodeRange,
+    isFragment: isFragment,
+    getOuterHTML: getOuterHTML,
+    mergeOptions: mergeOptions,
+    resolveAsset: resolveAsset,
+    checkComponentAttr: checkComponentAttr,
+    commonTagRE: commonTagRE,
+    reservedTagRE: reservedTagRE,
+    get warn(){ return warn; }
   });
 
   var uid = 0;
 
-  function initMixin (Vue) {
+  function initMixin(Vue){
     /**
      * The main init sequence. This is called for every
      * instance, including ones that are created from extended
@@ -2375,7 +2390,7 @@ var transition = Object.freeze({
      *                           in to the constructor.
      */
 
-    Vue.prototype._init = function (options) {
+    Vue.prototype._init = function (options){
       options = options || {};
 
       this.$el = null;
@@ -2400,8 +2415,8 @@ var transition = Object.freeze({
       // fragment instance properties
       this._isFragment = false;
       this._fragment = // @type {DocumentFragment}
-      this._fragmentStart = // @type {Text|Comment}
-      this._fragmentEnd = null; // @type {Text|Comment}
+        this._fragmentStart = // @type {Text|Comment}
+          this._fragmentEnd = null; // @type {Text|Comment}
 
       // lifecycle state
       this._isCompiled = this._isDestroyed = this._isReady = this._isAttached = this._isBeingDestroyed = this._vForRemoving = false;
@@ -2541,7 +2556,7 @@ var transition = Object.freeze({
    * @return {String} type
    */
 
-  function getPathCharType(ch) {
+  function getPathCharType(ch){
     if (ch === undefined) {
       return 'eof';
     }
@@ -2597,7 +2612,7 @@ var transition = Object.freeze({
    * @return {String}
    */
 
-  function formatSubPath(path) {
+  function formatSubPath(path){
     var trimmed = path.trim();
     // invalid leading 0
     if (path.charAt(0) === '0' && isNaN(path)) {
@@ -2613,7 +2628,7 @@ var transition = Object.freeze({
    * @return {Array|undefined}
    */
 
-  function parse(path) {
+  function parse(path){
     var keys = [];
     var index = -1;
     var mode = BEFORE_PATH;
@@ -2622,14 +2637,14 @@ var transition = Object.freeze({
 
     var actions = [];
 
-    actions[PUSH] = function () {
+    actions[PUSH] = function (){
       if (key !== undefined) {
         keys.push(key);
         key = undefined;
       }
     };
 
-    actions[APPEND] = function () {
+    actions[APPEND] = function (){
       if (key === undefined) {
         key = newChar;
       } else {
@@ -2637,12 +2652,12 @@ var transition = Object.freeze({
       }
     };
 
-    actions[INC_SUB_PATH_DEPTH] = function () {
+    actions[INC_SUB_PATH_DEPTH] = function (){
       actions[APPEND]();
       subPathDepth++;
     };
 
-    actions[PUSH_SUB_PATH] = function () {
+    actions[PUSH_SUB_PATH] = function (){
       if (subPathDepth > 0) {
         subPathDepth--;
         mode = IN_SUB_PATH;
@@ -2658,7 +2673,7 @@ var transition = Object.freeze({
       }
     };
 
-    function maybeUnescapeQuote() {
+    function maybeUnescapeQuote(){
       var nextChar = path[index + 1];
       if (mode === IN_SINGLE_QUOTE && nextChar === "'" || mode === IN_DOUBLE_QUOTE && nextChar === '"') {
         index++;
@@ -2708,7 +2723,7 @@ var transition = Object.freeze({
    * @return {Array|undefined}
    */
 
-  function parsePath(path) {
+  function parsePath(path){
     var hit = pathCache.get(path);
     if (!hit) {
       hit = parse(path);
@@ -2726,7 +2741,7 @@ var transition = Object.freeze({
    * @param {String} path
    */
 
-  function getPath(obj, path) {
+  function getPath(obj, path){
     return parseExpression(path).get(obj);
   }
 
@@ -2736,7 +2751,7 @@ var transition = Object.freeze({
 
   var warnNonExistent;
   if ('development' !== 'production') {
-    warnNonExistent = function (path, vm) {
+    warnNonExistent = function (path, vm){
       warn('You are setting a non-existent path "' + path.raw + '" ' + 'on a vm instance. Consider pre-initializing the property ' + 'with the "data" option for more reliable reactivity ' + 'and better performance.', vm);
     };
   }
@@ -2749,7 +2764,7 @@ var transition = Object.freeze({
    * @param {*} val
    */
 
-  function setPath(obj, path, val) {
+  function setPath(obj, path, val){
     var original = obj;
     if (typeof path === 'string') {
       path = parse(path);
@@ -2789,7 +2804,7 @@ var transition = Object.freeze({
     return true;
   }
 
-var path = Object.freeze({
+  var path = Object.freeze({
     parsePath: parsePath,
     getPath: getPath,
     setPath: setPath
@@ -2839,7 +2854,7 @@ var path = Object.freeze({
    * @return {String} - placeholder with index
    */
 
-  function save(str, isString) {
+  function save(str, isString){
     var i = saved.length;
     saved[i] = isString ? str.replace(newlineRE, '\\n') : str;
     return '"' + i + '"';
@@ -2852,7 +2867,7 @@ var path = Object.freeze({
    * @return {String}
    */
 
-  function rewrite(raw) {
+  function rewrite(raw){
     var c = raw.charAt(0);
     var path = raw.slice(1);
     if (allowedKeywordsRE.test(path)) {
@@ -2871,7 +2886,7 @@ var path = Object.freeze({
    * @return {String}
    */
 
-  function restore(str, i) {
+  function restore(str, i){
     return saved[i];
   }
 
@@ -2883,7 +2898,7 @@ var path = Object.freeze({
    * @return {Function}
    */
 
-  function compileGetter(exp) {
+  function compileGetter(exp){
     if (improperKeywordsRE.test(exp)) {
       'development' !== 'production' && warn('Avoid using reserved keywords in expression: ' + exp);
     }
@@ -2907,7 +2922,7 @@ var path = Object.freeze({
    * @return {Function|undefined}
    */
 
-  function makeGetterFn(body) {
+  function makeGetterFn(body){
     try {
       /* eslint-disable no-new-func */
       return new Function('scope', 'return ' + body + ';');
@@ -2924,10 +2939,10 @@ var path = Object.freeze({
    * @return {Function|undefined}
    */
 
-  function compileSetter(exp) {
+  function compileSetter(exp){
     var path = parsePath(exp);
     if (path) {
-      return function (scope, val) {
+      return function (scope, val){
         setPath(scope, path, val);
       };
     } else {
@@ -2943,7 +2958,7 @@ var path = Object.freeze({
    * @return {Function}
    */
 
-  function parseExpression(exp, needSet) {
+  function parseExpression(exp, needSet){
     exp = exp.trim();
     // try cache
     var hit = expressionCache.get(exp);
@@ -2955,10 +2970,10 @@ var path = Object.freeze({
     }
     var res = { exp: exp };
     res.get = isSimplePath(exp) && exp.indexOf('[') < 0
-    // optimized super simple getter
-    ? makeGetterFn('scope.' + exp)
-    // dynamic getter
-    : compileGetter(exp);
+      // optimized super simple getter
+      ? makeGetterFn('scope.' + exp)
+      // dynamic getter
+      : compileGetter(exp);
     if (needSet) {
       res.set = compileSetter(exp);
     }
@@ -2973,15 +2988,15 @@ var path = Object.freeze({
    * @return {Boolean}
    */
 
-  function isSimplePath(exp) {
+  function isSimplePath(exp){
     return pathTestRE.test(exp) &&
-    // don't treat true/false as paths
-    !booleanLiteralRE.test(exp) &&
-    // Math constants e.g. Math.PI, Math.E etc.
-    exp.slice(0, 5) !== 'Math.';
+      // don't treat true/false as paths
+      !booleanLiteralRE.test(exp) &&
+      // Math constants e.g. Math.PI, Math.E etc.
+      exp.slice(0, 5) !== 'Math.';
   }
 
-var expression = Object.freeze({
+  var expression = Object.freeze({
     parseExpression: parseExpression,
     isSimplePath: isSimplePath
   });
@@ -3003,7 +3018,7 @@ var expression = Object.freeze({
    * Reset the batcher's state.
    */
 
-  function resetBatcherState() {
+  function resetBatcherState(){
     queue.length = 0;
     userQueue.length = 0;
     has = {};
@@ -3015,7 +3030,7 @@ var expression = Object.freeze({
    * Flush both queues and run the watchers.
    */
 
-  function flushBatcherQueue() {
+  function flushBatcherQueue(){
     var _again = true;
 
     _function: while (_again) {
@@ -3044,7 +3059,7 @@ var expression = Object.freeze({
    * @param {Array} queue
    */
 
-  function runBatcherQueue(queue) {
+  function runBatcherQueue(queue){
     // do not cache length because more watchers might be pushed
     // as we run existing watchers
     for (var i = 0; i < queue.length; i++) {
@@ -3075,7 +3090,7 @@ var expression = Object.freeze({
    *   - {Function} run
    */
 
-  function pushWatcher(watcher) {
+  function pushWatcher(watcher){
     var id = watcher.id;
     if (has[id] == null) {
       // push watcher into appropriate queue
@@ -3111,7 +3126,7 @@ var expression = Object.freeze({
    *                 - {Function} [postProcess]
    * @constructor
    */
-  function Watcher(vm, expOrFn, cb, options) {
+  function Watcher(vm, expOrFn, cb, options){
     // mix in options
     if (options) {
       extend(this, options);
@@ -3148,7 +3163,7 @@ var expression = Object.freeze({
    * Evaluate the getter, and re-collect dependencies.
    */
 
-  Watcher.prototype.get = function () {
+  Watcher.prototype.get = function (){
     this.beforeGet();
     var scope = this.scope || this.vm;
     var value;
@@ -3183,7 +3198,7 @@ var expression = Object.freeze({
    * @param {*} value
    */
 
-  Watcher.prototype.set = function (value) {
+  Watcher.prototype.set = function (value){
     var scope = this.scope || this.vm;
     if (this.filters) {
       value = scope._applyFilters(value, this.value, this.filters, true);
@@ -3202,7 +3217,7 @@ var expression = Object.freeze({
         'development' !== 'production' && warn('It seems you are using two-way binding on ' + 'a v-for alias (' + this.expression + '), and the ' + 'v-for has filters. This will not work properly. ' + 'Either remove the filters or use an array of ' + 'objects and bind to object properties instead.', this.vm);
         return;
       }
-      forContext._withLock(function () {
+      forContext._withLock(function (){
         if (scope.$key) {
           // original is an object
           forContext.rawValue[scope.$key] = value;
@@ -3217,7 +3232,7 @@ var expression = Object.freeze({
    * Prepare for dependency collection.
    */
 
-  Watcher.prototype.beforeGet = function () {
+  Watcher.prototype.beforeGet = function (){
     Dep.target = this;
   };
 
@@ -3227,7 +3242,7 @@ var expression = Object.freeze({
    * @param {Dep} dep
    */
 
-  Watcher.prototype.addDep = function (dep) {
+  Watcher.prototype.addDep = function (dep){
     var id = dep.id;
     if (!this.newDepIds.has(id)) {
       this.newDepIds.add(id);
@@ -3242,7 +3257,7 @@ var expression = Object.freeze({
    * Clean up for dependency collection.
    */
 
-  Watcher.prototype.afterGet = function () {
+  Watcher.prototype.afterGet = function (){
     Dep.target = null;
     var i = this.deps.length;
     while (i--) {
@@ -3268,7 +3283,7 @@ var expression = Object.freeze({
    * @param {Boolean} shallow
    */
 
-  Watcher.prototype.update = function (shallow) {
+  Watcher.prototype.update = function (shallow){
     if (this.lazy) {
       this.dirty = true;
     } else if (this.sync || !config.async) {
@@ -3292,15 +3307,15 @@ var expression = Object.freeze({
    * Will be called by the batcher.
    */
 
-  Watcher.prototype.run = function () {
+  Watcher.prototype.run = function (){
     if (this.active) {
       var value = this.get();
       if (value !== this.value ||
-      // Deep watchers and watchers on Object/Arrays should fire even
-      // when the value is the same, because the value may
-      // have mutated; but only do so if this is a
-      // non-shallow update (caused by a vm digest).
-      (isObject(value) || this.deep) && !this.shallow) {
+        // Deep watchers and watchers on Object/Arrays should fire even
+        // when the value is the same, because the value may
+        // have mutated; but only do so if this is a
+        // non-shallow update (caused by a vm digest).
+        (isObject(value) || this.deep) && !this.shallow) {
         // set new value
         var oldValue = this.value;
         this.value = value;
@@ -3314,7 +3329,7 @@ var expression = Object.freeze({
           try {
             this.cb.call(this.vm, value, oldValue);
           } catch (e) {
-            nextTick(function () {
+            nextTick(function (){
               throw prevError;
             }, 0);
             throw e;
@@ -3332,7 +3347,7 @@ var expression = Object.freeze({
    * This only gets called for lazy watchers.
    */
 
-  Watcher.prototype.evaluate = function () {
+  Watcher.prototype.evaluate = function (){
     // avoid overwriting another watcher that is being
     // collected.
     var current = Dep.target;
@@ -3345,7 +3360,7 @@ var expression = Object.freeze({
    * Depend on all deps collected by this watcher.
    */
 
-  Watcher.prototype.depend = function () {
+  Watcher.prototype.depend = function (){
     var i = this.deps.length;
     while (i--) {
       this.deps[i].depend();
@@ -3356,7 +3371,7 @@ var expression = Object.freeze({
    * Remove self from all dependencies' subcriber list.
    */
 
-  Watcher.prototype.teardown = function () {
+  Watcher.prototype.teardown = function (){
     if (this.active) {
       // remove self from vm's watcher list
       // this is a somewhat expensive operation so we skip it
@@ -3383,9 +3398,10 @@ var expression = Object.freeze({
    */
 
   var seenObjects = new _Set();
-  function traverse(val, seen) {
+
+  function traverse(val, seen){
     var i = undefined,
-        keys = undefined;
+      keys = undefined;
     if (!seen) {
       seen = seenObjects;
       seen.clear();
@@ -3414,11 +3430,11 @@ var expression = Object.freeze({
 
   var text$1 = {
 
-    bind: function bind() {
+    bind: function bind(){
       this.attr = this.el.nodeType === 3 ? 'data' : 'textContent';
     },
 
-    update: function update(value) {
+    update: function update(value){
       this.el[this.attr] = _toString(value);
     }
   };
@@ -3449,7 +3465,7 @@ var expression = Object.freeze({
    * @return {Boolean}
    */
 
-  function isRealTemplate(node) {
+  function isRealTemplate(node){
     return isTemplate(node) && isFragment(node.content);
   }
 
@@ -3466,7 +3482,7 @@ var expression = Object.freeze({
    * @return {DocumentFragment}
    */
 
-  function stringToFragment(templateString, raw) {
+  function stringToFragment(templateString, raw){
     // try a cache hit first
     var cacheKey = raw ? templateString : templateString.trim();
     var hit = templateCache.get(cacheKey);
@@ -3515,7 +3531,7 @@ var expression = Object.freeze({
    * @return {DocumentFragment}
    */
 
-  function nodeToFragment(node) {
+  function nodeToFragment(node){
     // if its a template tag and the browser supports it,
     // its content is already a document fragment. However, iOS Safari has
     // bug when using directly cloned template content with touch
@@ -3544,7 +3560,7 @@ var expression = Object.freeze({
 
   // Test for the presence of the Safari template cloning bug
   // https://bugs.webkit.org/showug.cgi?id=137755
-  var hasBrokenTemplate = (function () {
+  var hasBrokenTemplate = (function (){
     /* istanbul ignore else */
     if (inBrowser) {
       var a = document.createElement('div');
@@ -3556,7 +3572,7 @@ var expression = Object.freeze({
   })();
 
   // Test for IE10/11 textarea placeholder clone bug
-  var hasTextareaCloneBug = (function () {
+  var hasTextareaCloneBug = (function (){
     /* istanbul ignore else */
     if (inBrowser) {
       var t = document.createElement('textarea');
@@ -3577,7 +3593,7 @@ var expression = Object.freeze({
    * @return {Element|DocumentFragment}
    */
 
-  function cloneNode(node) {
+  function cloneNode(node){
     /* istanbul ignore if */
     if (!node.querySelectorAll) {
       return node.cloneNode();
@@ -3636,7 +3652,7 @@ var expression = Object.freeze({
    * @return {DocumentFragment|undefined}
    */
 
-  function parseTemplate(template, shouldClone, raw) {
+  function parseTemplate(template, shouldClone, raw){
     var node, frag;
 
     // if the template is already a document fragment,
@@ -3671,14 +3687,14 @@ var expression = Object.freeze({
     return frag && shouldClone ? cloneNode(frag) : frag;
   }
 
-var template = Object.freeze({
+  var template = Object.freeze({
     cloneNode: cloneNode,
     parseTemplate: parseTemplate
   });
 
   var html = {
 
-    bind: function bind() {
+    bind: function bind(){
       // a comment node means this is a binding for
       // {{{ inline unescaped html }}}
       if (this.el.nodeType === 8) {
@@ -3690,7 +3706,7 @@ var template = Object.freeze({
       }
     },
 
-    update: function update(value) {
+    update: function update(value){
       value = _toString(value);
       if (this.nodes) {
         this.swap(value);
@@ -3699,7 +3715,7 @@ var template = Object.freeze({
       }
     },
 
-    swap: function swap(value) {
+    swap: function swap(value){
       // remove old nodes
       var i = this.nodes.length;
       while (i--) {
@@ -3725,7 +3741,7 @@ var template = Object.freeze({
    * @param {Object} [scope]
    * @param {Fragment} [parentFrag]
    */
-  function Fragment(linker, vm, frag, host, scope, parentFrag) {
+  function Fragment(linker, vm, frag, host, scope, parentFrag){
     this.children = [];
     this.childFrags = [];
     this.vm = vm;
@@ -3737,8 +3753,8 @@ var template = Object.freeze({
     }
     this.unlink = linker(vm, frag, host, scope, this);
     var single = this.single = frag.childNodes.length === 1 &&
-    // do not go single mode if the only node is an anchor
-    !frag.childNodes[0].__v_anchor;
+      // do not go single mode if the only node is an anchor
+      !frag.childNodes[0].__v_anchor;
     if (single) {
       this.node = frag.childNodes[0];
       this.before = singleBefore;
@@ -3763,7 +3779,7 @@ var template = Object.freeze({
    * @param {Function} hook
    */
 
-  Fragment.prototype.callHook = function (hook) {
+  Fragment.prototype.callHook = function (hook){
     var i, l;
     for (i = 0, l = this.childFrags.length; i < l; i++) {
       this.childFrags[i].callHook(hook);
@@ -3780,7 +3796,7 @@ var template = Object.freeze({
    * @param {Boolean} withTransition
    */
 
-  function singleBefore(target, withTransition) {
+  function singleBefore(target, withTransition){
     this.inserted = true;
     var method = withTransition !== false ? beforeWithTransition : before;
     method(this.node, target, this.vm);
@@ -3793,12 +3809,12 @@ var template = Object.freeze({
    * Remove fragment, single node version
    */
 
-  function singleRemove() {
+  function singleRemove(){
     this.inserted = false;
     var shouldCallRemove = inDoc(this.node);
     var self = this;
     this.beforeRemove();
-    removeWithTransition(this.node, this.vm, function () {
+    removeWithTransition(this.node, this.vm, function (){
       if (shouldCallRemove) {
         self.callHook(detach);
       }
@@ -3813,11 +3829,11 @@ var template = Object.freeze({
    * @param {Boolean} withTransition
    */
 
-  function multiBefore(target, withTransition) {
+  function multiBefore(target, withTransition){
     this.inserted = true;
     var vm = this.vm;
     var method = withTransition !== false ? beforeWithTransition : before;
-    mapNodeRange(this.node, this.end, function (node) {
+    mapNodeRange(this.node, this.end, function (node){
       method(node, target, vm);
     });
     if (inDoc(this.node)) {
@@ -3829,12 +3845,12 @@ var template = Object.freeze({
    * Remove fragment, multi-nodes version
    */
 
-  function multiRemove() {
+  function multiRemove(){
     this.inserted = false;
     var self = this;
     var shouldCallRemove = inDoc(this.node);
     this.beforeRemove();
-    removeNodeRange(this.node, this.end, this.vm, this.frag, function () {
+    removeNodeRange(this.node, this.end, this.vm, this.frag, function (){
       if (shouldCallRemove) {
         self.callHook(detach);
       }
@@ -3846,7 +3862,7 @@ var template = Object.freeze({
    * Prepare the fragment for removal.
    */
 
-  Fragment.prototype.beforeRemove = function () {
+  Fragment.prototype.beforeRemove = function (){
     var i, l;
     for (i = 0, l = this.childFrags.length; i < l; i++) {
       // call the same method recursively on child
@@ -3874,7 +3890,7 @@ var template = Object.freeze({
    * Destroy the fragment.
    */
 
-  Fragment.prototype.destroy = function () {
+  Fragment.prototype.destroy = function (){
     if (this.parentFrag) {
       this.parentFrag.childFrags.$remove(this);
     }
@@ -3888,7 +3904,7 @@ var template = Object.freeze({
    * @param {Vue} child
    */
 
-  function attach(child) {
+  function attach(child){
     if (!child._isAttached && inDoc(child.$el)) {
       child._callHook('attached');
     }
@@ -3900,7 +3916,7 @@ var template = Object.freeze({
    * @param {Vue} child
    */
 
-  function detach(child) {
+  function detach(child){
     if (child._isAttached && !inDoc(child.$el)) {
       child._callHook('detached');
     }
@@ -3915,7 +3931,7 @@ var template = Object.freeze({
    * @param {Vue} vm
    * @param {Element|String} el
    */
-  function FragmentFactory(vm, el) {
+  function FragmentFactory(vm, el){
     this.vm = vm;
     var template;
     var isString = typeof el === 'string';
@@ -3950,7 +3966,7 @@ var template = Object.freeze({
    * @param {Fragment} parentFrag
    */
 
-  FragmentFactory.prototype.create = function (host, scope, parentFrag) {
+  FragmentFactory.prototype.create = function (host, scope, parentFrag){
     var frag = cloneNode(this.template);
     return new Fragment(this.linker, this.vm, frag, host, scope, parentFrag);
   };
@@ -3975,7 +3991,7 @@ var template = Object.freeze({
 
     params: ['track-by', 'stagger', 'enter-stagger', 'leave-stagger'],
 
-    bind: function bind() {
+    bind: function bind(){
       // support "item in/of items" syntax
       var inMatch = this.expression.match(/(.*) (?:in|of) (.*)/);
       if (inMatch) {
@@ -4019,7 +4035,7 @@ var template = Object.freeze({
       this.factory = new FragmentFactory(this.vm, this.el);
     },
 
-    update: function update(data) {
+    update: function update(data){
       this.diff(data);
       this.updateRef();
       this.updateModel();
@@ -4039,7 +4055,7 @@ var template = Object.freeze({
      * @param {Array} data
      */
 
-    diff: function diff(data) {
+    diff: function diff(data){
       // check if the Array was converted from an Object
       var item = data[0];
       var convertedFromObject = this.fromObject = isObject(item) && hasOwn(item, '$key') && hasOwn(item, '$value');
@@ -4081,7 +4097,7 @@ var template = Object.freeze({
           // update data for track-by, object repeat &
           // primitive values.
           if (trackByKey || convertedFromObject || primitive) {
-            withoutConversion(function () {
+            withoutConversion(function (){
               frag.scope[alias] = value;
             });
           }
@@ -4119,7 +4135,7 @@ var template = Object.freeze({
       }
       this.vm._vForRemoving = false;
       if (removalIndex) {
-        this.vm._watchers = this.vm._watchers.filter(function (w) {
+        this.vm._watchers = this.vm._watchers.filter(function (w){
           return w.active;
         });
       }
@@ -4136,9 +4152,9 @@ var template = Object.freeze({
         if (frag.reused && !frag.staggerCb) {
           currentPrev = findPrevFrag(frag, start, this.id);
           if (currentPrev !== targetPrev && (!currentPrev ||
-          // optimization for moving a single item.
-          // thanks to suggestions by @livoras in #1807
-          findPrevFrag(currentPrev, start, this.id) !== targetPrev)) {
+            // optimization for moving a single item.
+            // thanks to suggestions by @livoras in #1807
+            findPrevFrag(currentPrev, start, this.id) !== targetPrev)) {
             this.move(frag, prevEl);
           }
         } else {
@@ -4160,7 +4176,7 @@ var template = Object.freeze({
      * @return {Fragment}
      */
 
-    create: function create(value, alias, index, key) {
+    create: function create(value, alias, index, key){
       var host = this._host;
       // create iteration scope
       var parentScope = this._scope || this.vm;
@@ -4175,7 +4191,7 @@ var template = Object.freeze({
       // define scope properties
       // important: define the scope alias without forced conversion
       // so that frozen data structures remain non-reactive.
-      withoutConversion(function () {
+      withoutConversion(function (){
         defineReactive(scope, alias, value);
       });
       defineReactive(scope, '$index', index);
@@ -4198,7 +4214,7 @@ var template = Object.freeze({
      * Update the v-ref on owner vm.
      */
 
-    updateRef: function updateRef() {
+    updateRef: function updateRef(){
       var ref = this.descriptor.ref;
       if (!ref) return;
       var hash = (this._scope || this.vm).$refs;
@@ -4207,7 +4223,7 @@ var template = Object.freeze({
         refs = this.frags.map(findVmFromFrag);
       } else {
         refs = {};
-        this.frags.forEach(function (frag) {
+        this.frags.forEach(function (frag){
           refs[frag.scope.$key] = findVmFromFrag(frag);
         });
       }
@@ -4219,7 +4235,7 @@ var template = Object.freeze({
      * parent <select>.
      */
 
-    updateModel: function updateModel() {
+    updateModel: function updateModel(){
       if (this.isOption) {
         var parent = this.start.parentNode;
         var model = parent && parent.__v_model;
@@ -4238,7 +4254,7 @@ var template = Object.freeze({
      * @param {Boolean} inDocument
      */
 
-    insert: function insert(frag, index, prevEl, inDocument) {
+    insert: function insert(frag, index, prevEl, inDocument){
       if (frag.staggerCb) {
         frag.staggerCb.cancel();
         frag.staggerCb = null;
@@ -4254,7 +4270,7 @@ var template = Object.freeze({
           anchor.__v_frag = frag;
         }
         after(anchor, prevEl);
-        var op = frag.staggerCb = cancellable(function () {
+        var op = frag.staggerCb = cancellable(function (){
           frag.staggerCb = null;
           frag.before(anchor);
           remove(anchor);
@@ -4282,7 +4298,7 @@ var template = Object.freeze({
      * @param {Boolean} inDocument
      */
 
-    remove: function remove(frag, index, total, inDocument) {
+    remove: function remove(frag, index, total, inDocument){
       if (frag.staggerCb) {
         frag.staggerCb.cancel();
         frag.staggerCb = null;
@@ -4295,7 +4311,7 @@ var template = Object.freeze({
       }
       var staggerAmount = this.getStagger(frag, index, total, 'leave');
       if (inDocument && staggerAmount) {
-        var op = frag.staggerCb = cancellable(function () {
+        var op = frag.staggerCb = cancellable(function (){
           frag.staggerCb = null;
           frag.remove();
         });
@@ -4313,7 +4329,7 @@ var template = Object.freeze({
      * @param {Node} prevEl
      */
 
-    move: function move(frag, prevEl) {
+    move: function move(frag, prevEl){
       // fix a common issue with Sortable:
       // if prevEl doesn't have nextSibling, this means it's
       // been dragged after the end anchor. Just re-position
@@ -4334,7 +4350,7 @@ var template = Object.freeze({
      * @param {String} [key]
      */
 
-    cacheFrag: function cacheFrag(value, frag, index, key) {
+    cacheFrag: function cacheFrag(value, frag, index, key){
       var trackByKey = this.params.trackBy;
       var cache = this.cache;
       var primitive = !isObject(value);
@@ -4372,7 +4388,7 @@ var template = Object.freeze({
      * @return {Fragment}
      */
 
-    getCachedFrag: function getCachedFrag(value, index, key) {
+    getCachedFrag: function getCachedFrag(value, index, key){
       var trackByKey = this.params.trackBy;
       var primitive = !isObject(value);
       var frag;
@@ -4394,7 +4410,7 @@ var template = Object.freeze({
      * @param {Fragment} frag
      */
 
-    deleteCachedFrag: function deleteCachedFrag(frag) {
+    deleteCachedFrag: function deleteCachedFrag(frag){
       var value = frag.raw;
       var trackByKey = this.params.trackBy;
       var scope = frag.scope;
@@ -4421,7 +4437,7 @@ var template = Object.freeze({
      * @param {String} type
      */
 
-    getStagger: function getStagger(frag, index, total, type) {
+    getStagger: function getStagger(frag, index, total, type){
       type = type + 'Stagger';
       var trans = frag.node.__v_trans;
       var hooks = trans && trans.hooks;
@@ -4434,7 +4450,7 @@ var template = Object.freeze({
      * filters. This is passed to and called by the watcher.
      */
 
-    _preProcess: function _preProcess(value) {
+    _preProcess: function _preProcess(value){
       // regardless of type, store the un-filtered raw value.
       this.rawValue = value;
       return value;
@@ -4449,7 +4465,7 @@ var template = Object.freeze({
      * the v-for to update when the source Object is mutated.
      */
 
-    _postProcess: function _postProcess(value) {
+    _postProcess: function _postProcess(value){
       if (isArray(value)) {
         return value;
       } else if (isPlainObject(value)) {
@@ -4474,7 +4490,7 @@ var template = Object.freeze({
       }
     },
 
-    unbind: function unbind() {
+    unbind: function unbind(){
       if (this.descriptor.ref) {
         (this._scope || this.vm).$refs[this.descriptor.ref] = null;
       }
@@ -4506,7 +4522,7 @@ var template = Object.freeze({
    * @return {Fragment}
    */
 
-  function findPrevFrag(frag, anchor, id) {
+  function findPrevFrag(frag, anchor, id){
     var el = frag.node.previousSibling;
     /* istanbul ignore if */
     if (!el) return;
@@ -4527,7 +4543,7 @@ var template = Object.freeze({
    * @return {Vue|undefined}
    */
 
-  function findVmFromFrag(frag) {
+  function findVmFromFrag(frag){
     var node = frag.node;
     // handle multi-node frag
     if (frag.end) {
@@ -4545,7 +4561,7 @@ var template = Object.freeze({
    * @return {Array}
    */
 
-  function range(n) {
+  function range(n){
     var i = -1;
     var ret = new Array(Math.floor(n));
     while (++i < n) {
@@ -4563,12 +4579,12 @@ var template = Object.freeze({
    * @param {String} [trackByKey]
    */
 
-  function getTrackByKey(index, key, value, trackByKey) {
+  function getTrackByKey(index, key, value, trackByKey){
     return trackByKey ? trackByKey === '$index' ? index : trackByKey.charAt(0).match(/\w/) ? getPath(value, trackByKey) : value[trackByKey] : key || value;
   }
 
   if ('development' !== 'production') {
-    vFor.warnDuplicate = function (value) {
+    vFor.warnDuplicate = function (value){
       warn('Duplicate value found in v-for="' + this.descriptor.raw + '": ' + JSON.stringify(value) + '. Use track-by="$index" if ' + 'you are expecting duplicate values.', this.vm);
     };
   }
@@ -4578,7 +4594,7 @@ var template = Object.freeze({
     priority: IF,
     terminal: true,
 
-    bind: function bind() {
+    bind: function bind(){
       var el = this.el;
       if (!el.__vue__) {
         // check else block
@@ -4596,7 +4612,7 @@ var template = Object.freeze({
       }
     },
 
-    update: function update(value) {
+    update: function update(value){
       if (this.invalid) return;
       if (value) {
         if (!this.frag) {
@@ -4607,7 +4623,7 @@ var template = Object.freeze({
       }
     },
 
-    insert: function insert() {
+    insert: function insert(){
       if (this.elseFrag) {
         this.elseFrag.remove();
         this.elseFrag = null;
@@ -4620,7 +4636,7 @@ var template = Object.freeze({
       this.frag.before(this.anchor);
     },
 
-    remove: function remove() {
+    remove: function remove(){
       if (this.frag) {
         this.frag.remove();
         this.frag = null;
@@ -4634,7 +4650,7 @@ var template = Object.freeze({
       }
     },
 
-    unbind: function unbind() {
+    unbind: function unbind(){
       if (this.frag) {
         this.frag.destroy();
       }
@@ -4646,7 +4662,7 @@ var template = Object.freeze({
 
   var show = {
 
-    bind: function bind() {
+    bind: function bind(){
       // check else block
       var next = this.el.nextElementSibling;
       if (next && getAttr(next, 'v-else') !== null) {
@@ -4654,20 +4670,20 @@ var template = Object.freeze({
       }
     },
 
-    update: function update(value) {
+    update: function update(value){
       this.apply(this.el, value);
       if (this.elseEl) {
         this.apply(this.elseEl, !value);
       }
     },
 
-    apply: function apply(el, value) {
+    apply: function apply(el, value){
       if (inDoc(el)) {
         applyTransition(el, value ? 1 : -1, toggle, this.vm);
       } else {
         toggle();
       }
-      function toggle() {
+      function toggle(){
         el.style.display = value ? '' : 'none';
       }
     }
@@ -4675,7 +4691,7 @@ var template = Object.freeze({
 
   var text$2 = {
 
-    bind: function bind() {
+    bind: function bind(){
       var self = this;
       var el = this.el;
       var isRange = el.type === 'range';
@@ -4692,10 +4708,10 @@ var template = Object.freeze({
       // suggestions... (see Discussion/#162)
       var composing = false;
       if (!isAndroid && !isRange) {
-        this.on('compositionstart', function () {
+        this.on('compositionstart', function (){
           composing = true;
         });
-        this.on('compositionend', function () {
+        this.on('compositionend', function (){
           composing = false;
           // in IE11 the "compositionend" event fires AFTER
           // the "input" event, so the input handler is blocked
@@ -4712,10 +4728,10 @@ var template = Object.freeze({
       // and force update on blur.
       this.focused = false;
       if (!isRange && !lazy) {
-        this.on('focus', function () {
+        this.on('focus', function (){
           self.focused = true;
         });
-        this.on('blur', function () {
+        this.on('blur', function (){
           self.focused = false;
           // do not sync value after fragment removal (#2017)
           if (!self._frag || self._frag.inserted) {
@@ -4725,7 +4741,7 @@ var template = Object.freeze({
       }
 
       // Now attach the main listener
-      this.listener = this.rawListener = function () {
+      this.listener = this.rawListener = function (){
         if (composing || !self._bound) {
           return;
         }
@@ -4733,7 +4749,7 @@ var template = Object.freeze({
         self.set(val);
         // force update on next tick to avoid lock & same value
         // also only update when user is not typing
-        nextTick(function () {
+        nextTick(function (){
           if (self._bound && !self.focused) {
             self.update(self._watcher.value);
           }
@@ -4771,10 +4787,10 @@ var template = Object.freeze({
 
       // IE9 doesn't fire input event on backspace/del/cut
       if (!lazy && isIE9) {
-        this.on('cut', function () {
+        this.on('cut', function (){
           nextTick(self.listener);
         });
-        this.on('keyup', function (e) {
+        this.on('keyup', function (e){
           if (e.keyCode === 46 || e.keyCode === 8) {
             self.listener();
           }
@@ -4787,11 +4803,11 @@ var template = Object.freeze({
       }
     },
 
-    update: function update(value) {
+    update: function update(value){
       this.el.value = _toString(value);
     },
 
-    unbind: function unbind() {
+    unbind: function unbind(){
       var el = this.el;
       if (this.hasjQuery) {
         var method = jQuery.fn.off ? 'off' : 'unbind';
@@ -4803,11 +4819,11 @@ var template = Object.freeze({
 
   var radio = {
 
-    bind: function bind() {
+    bind: function bind(){
       var self = this;
       var el = this.el;
 
-      this.getValue = function () {
+      this.getValue = function (){
         // value overwrite via v-bind:value
         if (el.hasOwnProperty('_value')) {
           return el._value;
@@ -4819,7 +4835,7 @@ var template = Object.freeze({
         return val;
       };
 
-      this.listener = function () {
+      this.listener = function (){
         self.set(self.getValue());
       };
       this.on('change', this.listener);
@@ -4829,19 +4845,19 @@ var template = Object.freeze({
       }
     },
 
-    update: function update(value) {
+    update: function update(value){
       this.el.checked = looseEqual(value, this.getValue());
     }
   };
 
   var select = {
 
-    bind: function bind() {
+    bind: function bind(){
       var self = this;
       var el = this.el;
 
       // method to force update DOM using latest value.
-      this.forceUpdate = function () {
+      this.forceUpdate = function (){
         if (self._watcher) {
           self.update(self._watcher.get());
         }
@@ -4851,7 +4867,7 @@ var template = Object.freeze({
       var multiple = this.multiple = el.hasAttribute('multiple');
 
       // attach listener
-      this.listener = function () {
+      this.listener = function (){
         var value = getValue(el, multiple);
         value = self.params.number ? isArray(value) ? value.map(toNumber) : toNumber(value) : value;
         self.set(value);
@@ -4871,7 +4887,7 @@ var template = Object.freeze({
       this.vm.$on('hook:attached', this.forceUpdate);
     },
 
-    update: function update(value) {
+    update: function update(value){
       var el = this.el;
       el.selectedIndex = -1;
       var multi = this.multiple && isArray(value);
@@ -4887,7 +4903,7 @@ var template = Object.freeze({
       }
     },
 
-    unbind: function unbind() {
+    unbind: function unbind(){
       /* istanbul ignore next */
       this.vm.$off('hook:attached', this.forceUpdate);
     }
@@ -4902,7 +4918,7 @@ var template = Object.freeze({
    * @return {Array|*}
    */
 
-  function getValue(el, multi, init) {
+  function getValue(el, multi, init){
     var res = multi ? [] : null;
     var op, val, selected;
     for (var i = 0, l = el.options.length; i < l; i++) {
@@ -4928,7 +4944,7 @@ var template = Object.freeze({
    * @param {*} val
    */
 
-  function indexOf$1(arr, val) {
+  function indexOf$1(arr, val){
     var i = arr.length;
     while (i--) {
       if (looseEqual(arr[i], val)) {
@@ -4940,15 +4956,15 @@ var template = Object.freeze({
 
   var checkbox = {
 
-    bind: function bind() {
+    bind: function bind(){
       var self = this;
       var el = this.el;
 
-      this.getValue = function () {
+      this.getValue = function (){
         return el.hasOwnProperty('_value') ? el._value : self.params.number ? toNumber(el.value) : el.value;
       };
 
-      function getBooleanValue() {
+      function getBooleanValue(){
         var val = el.checked;
         if (val && el.hasOwnProperty('_trueValue')) {
           return el._trueValue;
@@ -4959,7 +4975,7 @@ var template = Object.freeze({
         return val;
       }
 
-      this.listener = function () {
+      this.listener = function (){
         var model = self._watcher.value;
         if (isArray(model)) {
           var val = self.getValue();
@@ -4981,7 +4997,7 @@ var template = Object.freeze({
       }
     },
 
-    update: function update(value) {
+    update: function update(value){
       var el = this.el;
       if (isArray(value)) {
         el.checked = indexOf(value, this.getValue()) > -1;
@@ -5020,7 +5036,7 @@ var template = Object.freeze({
      *     - number
      */
 
-    bind: function bind() {
+    bind: function bind(){
       // friendly warning...
       this.checkFilters();
       if (this.hasRead && !this.hasWrite) {
@@ -5049,7 +5065,7 @@ var template = Object.freeze({
      * Check read/write filter stats.
      */
 
-    checkFilters: function checkFilters() {
+    checkFilters: function checkFilters(){
       var filters = this.filters;
       if (!filters) return;
       var i = filters.length;
@@ -5064,7 +5080,7 @@ var template = Object.freeze({
       }
     },
 
-    unbind: function unbind() {
+    unbind: function unbind(){
       this.el.__v_model = null;
       this._unbind && this._unbind();
     }
@@ -5083,8 +5099,8 @@ var template = Object.freeze({
     down: 40
   };
 
-  function keyFilter(handler, keys) {
-    var codes = keys.map(function (key) {
+  function keyFilter(handler, keys){
+    var codes = keys.map(function (key){
       var charCode = key.charCodeAt(0);
       if (charCode > 47 && charCode < 58) {
         return parseInt(key, 10);
@@ -5098,29 +5114,29 @@ var template = Object.freeze({
       return keyCodes[key];
     });
     codes = [].concat.apply([], codes);
-    return function keyHandler(e) {
+    return function keyHandler(e){
       if (codes.indexOf(e.keyCode) > -1) {
         return handler.call(this, e);
       }
     };
   }
 
-  function stopFilter(handler) {
-    return function stopHandler(e) {
+  function stopFilter(handler){
+    return function stopHandler(e){
       e.stopPropagation();
       return handler.call(this, e);
     };
   }
 
-  function preventFilter(handler) {
-    return function preventHandler(e) {
+  function preventFilter(handler){
+    return function preventHandler(e){
       e.preventDefault();
       return handler.call(this, e);
     };
   }
 
-  function selfFilter(handler) {
-    return function selfHandler(e) {
+  function selfFilter(handler){
+    return function selfHandler(e){
       if (e.target === e.currentTarget) {
         return handler.call(this, e);
       }
@@ -5133,22 +5149,22 @@ var template = Object.freeze({
     acceptStatement: true,
     keyCodes: keyCodes,
 
-    bind: function bind() {
+    bind: function bind(){
       // deal with iframes
       if (this.el.tagName === 'IFRAME' && this.arg !== 'load') {
         var self = this;
-        this.iframeBind = function () {
+        this.iframeBind = function (){
           on(self.el.contentWindow, self.arg, self.handler, self.modifiers.capture);
         };
         this.on('load', this.iframeBind);
       }
     },
 
-    update: function update(handler) {
+    update: function update(handler){
       // stub a noop for v-on with no value,
       // e.g. @mousedown.prevent
       if (!this.descriptor.raw) {
-        handler = function () {};
+        handler = function (){};
       }
 
       if (typeof handler !== 'function') {
@@ -5167,7 +5183,7 @@ var template = Object.freeze({
         handler = selfFilter(handler);
       }
       // key filter
-      var keys = Object.keys(this.modifiers).filter(function (key) {
+      var keys = Object.keys(this.modifiers).filter(function (key){
         return key !== 'stop' && key !== 'prevent' && key !== 'self' && key !== 'capture';
       });
       if (keys.length) {
@@ -5184,14 +5200,14 @@ var template = Object.freeze({
       }
     },
 
-    reset: function reset() {
+    reset: function reset(){
       var el = this.iframeBind ? this.el.contentWindow : this.el;
       if (this.handler) {
         off(el, this.arg, this.handler);
       }
     },
 
-    unbind: function unbind() {
+    unbind: function unbind(){
       this.reset();
     }
   };
@@ -5207,7 +5223,7 @@ var template = Object.freeze({
 
     deep: true,
 
-    update: function update(value) {
+    update: function update(value){
       if (typeof value === 'string') {
         this.el.style.cssText = value;
       } else if (isArray(value)) {
@@ -5217,7 +5233,7 @@ var template = Object.freeze({
       }
     },
 
-    handleObject: function handleObject(value) {
+    handleObject: function handleObject(value){
       // cache object styles so that only changed props
       // are actually updated.
       var cache = this.cache || (this.cache = {});
@@ -5237,7 +5253,7 @@ var template = Object.freeze({
       }
     },
 
-    handleSingle: function handleSingle(prop, value) {
+    handleSingle: function handleSingle(prop, value){
       prop = normalize(prop);
       if (!prop) return; // unsupported prop
       // cast possible numbers/booleans into strings
@@ -5271,7 +5287,7 @@ var template = Object.freeze({
    * @return {String}
    */
 
-  function normalize(prop) {
+  function normalize(prop){
     if (propCache[prop]) {
       return propCache[prop];
     }
@@ -5288,7 +5304,7 @@ var template = Object.freeze({
    * @return {String}
    */
 
-  function prefix(prop) {
+  function prefix(prop){
     prop = hyphenate(prop);
     var camel = camelize(prop);
     var upper = camel.charAt(0).toUpperCase() + camel.slice(1);
@@ -5339,7 +5355,7 @@ var template = Object.freeze({
 
     priority: BIND,
 
-    bind: function bind() {
+    bind: function bind(){
       var attr = this.arg;
       var tag = this.el.tagName;
       // should be deep watch on object mode
@@ -5378,7 +5394,7 @@ var template = Object.freeze({
       }
     },
 
-    update: function update(value) {
+    update: function update(value){
       if (this.invalid) {
         return;
       }
@@ -5393,7 +5409,7 @@ var template = Object.freeze({
     // share object handler with v-bind:class
     handleObject: style.handleObject,
 
-    handleSingle: function handleSingle(attr, value) {
+    handleSingle: function handleSingle(attr, value){
       var el = this.el;
       var interp = this.descriptor.interp;
       if (this.modifiers.camel) {
@@ -5401,7 +5417,7 @@ var template = Object.freeze({
       }
       if (!interp && attrWithPropsRE.test(attr) && attr in el) {
         var attrValue = attr === 'value' ? value == null // IE9 will set input.value to "null" for null...
-        ? '' : value : value;
+          ? '' : value : value;
 
         if (el[attr] !== attrValue) {
           el[attr] = attrValue;
@@ -5448,7 +5464,7 @@ var template = Object.freeze({
 
     priority: EL,
 
-    bind: function bind() {
+    bind: function bind(){
       /* istanbul ignore if */
       if (!this.arg) {
         return;
@@ -5462,7 +5478,7 @@ var template = Object.freeze({
       }
     },
 
-    unbind: function unbind() {
+    unbind: function unbind(){
       var refs = (this._scope || this.vm).$els;
       if (refs[this.id] === this.el) {
         refs[this.id] = null;
@@ -5471,15 +5487,15 @@ var template = Object.freeze({
   };
 
   var ref = {
-    bind: function bind() {
+    bind: function bind(){
       'development' !== 'production' && warn('v-ref:' + this.arg + ' must be used on a child ' + 'component. Found on <' + this.el.tagName.toLowerCase() + '>.', this.vm);
     }
   };
 
   var cloak = {
-    bind: function bind() {
+    bind: function bind(){
       var el = this.el;
-      this.vm.$once('pre-hook:compiled', function () {
+      this.vm.$once('pre-hook:compiled', function (){
         el.removeAttribute('v-cloak');
       });
     }
@@ -5504,7 +5520,7 @@ var template = Object.freeze({
 
     deep: true,
 
-    update: function update(value) {
+    update: function update(value){
       if (!value) {
         this.cleanup();
       } else if (typeof value === 'string') {
@@ -5514,7 +5530,7 @@ var template = Object.freeze({
       }
     },
 
-    setClass: function setClass(value) {
+    setClass: function setClass(value){
       this.cleanup(value);
       for (var i = 0, l = value.length; i < l; i++) {
         var val = value[i];
@@ -5525,7 +5541,7 @@ var template = Object.freeze({
       this.prevKeys = value;
     },
 
-    cleanup: function cleanup(value) {
+    cleanup: function cleanup(value){
       var prevKeys = this.prevKeys;
       if (!prevKeys) return;
       var i = prevKeys.length;
@@ -5546,7 +5562,7 @@ var template = Object.freeze({
    * @return {Array<String>}
    */
 
-  function normalize$1(value) {
+  function normalize$1(value){
     var res = [];
     if (isArray(value)) {
       for (var i = 0, l = value.length; i < l; i++) {
@@ -5580,7 +5596,7 @@ var template = Object.freeze({
    * @param {Function} fn
    */
 
-  function apply(el, key, fn) {
+  function apply(el, key, fn){
     key = key.trim();
     if (key.indexOf(' ') === -1) {
       fn(el, key);
@@ -5611,7 +5627,7 @@ var template = Object.freeze({
      *   <component :is="view">
      */
 
-    bind: function bind() {
+    bind: function bind(){
       if (!this.el.__vue__) {
         // keep-alive cache
         this.keepAlive = this.params.keepAlive;
@@ -5655,7 +5671,7 @@ var template = Object.freeze({
      * literal scenario, e.g. <component :is="view">
      */
 
-    update: function update(value) {
+    update: function update(value){
       if (!this.literal) {
         this.setComponent(value);
       }
@@ -5674,7 +5690,7 @@ var template = Object.freeze({
      * @param {Function} [cb]
      */
 
-    setComponent: function setComponent(value, cb) {
+    setComponent: function setComponent(value, cb){
       this.invalidatePending();
       if (!value) {
         // just remove current
@@ -5683,7 +5699,7 @@ var template = Object.freeze({
         this.childVM = null;
       } else {
         var self = this;
-        this.resolveComponent(value, function () {
+        this.resolveComponent(value, function (){
           self.mountComponent(cb);
         });
       }
@@ -5697,9 +5713,9 @@ var template = Object.freeze({
      * @param {Function} cb
      */
 
-    resolveComponent: function resolveComponent(value, cb) {
+    resolveComponent: function resolveComponent(value, cb){
       var self = this;
-      this.pendingComponentCb = cancellable(function (Component) {
+      this.pendingComponentCb = cancellable(function (Component){
         self.ComponentName = Component.options.name || (typeof value === 'string' ? value : null);
         self.Component = Component;
         cb();
@@ -5716,7 +5732,7 @@ var template = Object.freeze({
      * @param {Function} [cb]
      */
 
-    mountComponent: function mountComponent(cb) {
+    mountComponent: function mountComponent(cb){
       // actual mount
       this.unbuild(true);
       var self = this;
@@ -5725,7 +5741,7 @@ var template = Object.freeze({
       var newComponent = this.build();
       if (activateHooks && !cached) {
         this.waitingFor = newComponent;
-        callActivateHooks(activateHooks, newComponent, function () {
+        callActivateHooks(activateHooks, newComponent, function (){
           if (self.waitingFor !== newComponent) {
             return;
           }
@@ -5747,7 +5763,7 @@ var template = Object.freeze({
      * pending callback.
      */
 
-    invalidatePending: function invalidatePending() {
+    invalidatePending: function invalidatePending(){
       if (this.pendingComponentCb) {
         this.pendingComponentCb.cancel();
         this.pendingComponentCb = null;
@@ -5763,7 +5779,7 @@ var template = Object.freeze({
      * @return {Vue} - the created instance
      */
 
-    build: function build(extraOptions) {
+    build: function build(extraOptions){
       var cached = this.getCached();
       if (cached) {
         return cached;
@@ -5823,7 +5839,7 @@ var template = Object.freeze({
      * @return {Vue|undefined}
      */
 
-    getCached: function getCached() {
+    getCached: function getCached(){
       return this.keepAlive && this.cache[this.Component.cid];
     },
 
@@ -5834,7 +5850,7 @@ var template = Object.freeze({
      * @param {Boolean} defer
      */
 
-    unbuild: function unbuild(defer) {
+    unbuild: function unbuild(defer){
       if (this.waitingFor) {
         if (!this.keepAlive) {
           this.waitingFor.$destroy();
@@ -5863,7 +5879,7 @@ var template = Object.freeze({
      * @param {Function} cb
      */
 
-    remove: function remove(child, cb) {
+    remove: function remove(child, cb){
       var keepAlive = this.keepAlive;
       if (child) {
         // we may have a component switch when a previous
@@ -5873,7 +5889,7 @@ var template = Object.freeze({
         this.pendingRemovals++;
         this.pendingRemovalCb = cb;
         var self = this;
-        child.$remove(function () {
+        child.$remove(function (){
           self.pendingRemovals--;
           if (!keepAlive) child._cleanup();
           if (!self.pendingRemovals && self.pendingRemovalCb) {
@@ -5894,7 +5910,7 @@ var template = Object.freeze({
      * @param {Function} [cb]
      */
 
-    transition: function transition(target, cb) {
+    transition: function transition(target, cb){
       var self = this;
       var current = this.childVM;
       // for devtool inspection
@@ -5903,12 +5919,12 @@ var template = Object.freeze({
       this.childVM = target;
       switch (self.params.transitionMode) {
         case 'in-out':
-          target.$before(self.anchor, function () {
+          target.$before(self.anchor, function (){
             self.remove(current, cb);
           });
           break;
         case 'out-in':
-          self.remove(current, function () {
+          self.remove(current, function (){
             target.$before(self.anchor, cb);
           });
           break;
@@ -5922,7 +5938,7 @@ var template = Object.freeze({
      * Unbind.
      */
 
-    unbind: function unbind() {
+    unbind: function unbind(){
       this.invalidatePending();
       // Do not defer cleanup when unbinding
       this.unbuild();
@@ -5944,11 +5960,11 @@ var template = Object.freeze({
    * @param {Function} cb
    */
 
-  function callActivateHooks(hooks, vm, cb) {
+  function callActivateHooks(hooks, vm, cb){
     var total = hooks.length;
     var called = 0;
     hooks[0].call(vm, next);
-    function next() {
+    function next(){
       if (++called >= total) {
         cb();
       } else {
@@ -5974,7 +5990,7 @@ var template = Object.freeze({
    * @return {Function} propsLinkFn
    */
 
-  function compileProps(el, propOptions, vm) {
+  function compileProps(el, propOptions, vm){
     var props = [];
     var names = Object.keys(propOptions);
     var i = names.length;
@@ -6067,8 +6083,8 @@ var template = Object.freeze({
    * @return {Function} propsLinkFn
    */
 
-  function makePropsLinkFn(props) {
-    return function propsLinkFn(vm, scope) {
+  function makePropsLinkFn(props){
+    return function propsLinkFn(vm, scope){
       // store resolved props info
       vm._props = {};
       var inlineProps = vm.$options.propsData;
@@ -6082,7 +6098,8 @@ var template = Object.freeze({
         vm._props[path] = prop;
         if (inlineProps && hasOwn(inlineProps, path)) {
           initProp(vm, prop, inlineProps[path]);
-        }if (raw === null) {
+        }
+        if (raw === null) {
           // initialize absent prop
           initProp(vm, prop, undefined);
         } else if (prop.dynamic) {
@@ -6100,9 +6117,9 @@ var template = Object.freeze({
                 prop: prop
               }, null, null, scope); // el, host, scope
             } else {
-                // root instance
-                initProp(vm, prop, vm.$get(prop.parentPath));
-              }
+              // root instance
+              initProp(vm, prop, vm.$get(prop.parentPath));
+            }
           }
         } else if (prop.optimizedLiteral) {
           // optimized literal, cast it and just set once
@@ -6132,7 +6149,7 @@ var template = Object.freeze({
    * @param {Function} fn
    */
 
-  function processPropValue(vm, prop, rawValue, fn) {
+  function processPropValue(vm, prop, rawValue, fn){
     var isSimple = prop.dynamic && isSimplePath(prop.parentPath);
     var value = rawValue;
     if (value === undefined) {
@@ -6144,7 +6161,7 @@ var template = Object.freeze({
       value = undefined;
     }
     if (isSimple && !coerced) {
-      withoutConversion(function () {
+      withoutConversion(function (){
         fn(value);
       });
     } else {
@@ -6160,8 +6177,8 @@ var template = Object.freeze({
    * @param {*} value
    */
 
-  function initProp(vm, prop, value) {
-    processPropValue(vm, prop, value, function (value) {
+  function initProp(vm, prop, value){
+    processPropValue(vm, prop, value, function (value){
       defineReactive(vm, prop.path, value);
     });
   }
@@ -6174,8 +6191,8 @@ var template = Object.freeze({
    * @param {*} value
    */
 
-  function updateProp(vm, prop, value) {
-    processPropValue(vm, prop, value, function (value) {
+  function updateProp(vm, prop, value){
+    processPropValue(vm, prop, value, function (value){
       vm[prop.path] = value;
     });
   }
@@ -6188,7 +6205,7 @@ var template = Object.freeze({
    * @return {*}
    */
 
-  function getPropDefaultValue(vm, prop) {
+  function getPropDefaultValue(vm, prop){
     // no default, return undefined
     var options = prop.options;
     if (!hasOwn(options, 'default')) {
@@ -6212,13 +6229,13 @@ var template = Object.freeze({
    * @param {Vue} vm
    */
 
-  function assertProp(prop, value, vm) {
+  function assertProp(prop, value, vm){
     if (!prop.options.required && ( // non-required
-    prop.raw === null || // abscent
-    value == null) // null or undefined
+      prop.raw === null || // abscent
+      value == null) // null or undefined
     ) {
-        return true;
-      }
+      return true;
+    }
     var options = prop.options;
     var type = options.type;
     var valid = !type;
@@ -6257,7 +6274,7 @@ var template = Object.freeze({
    * @return {*}
    */
 
-  function coerceProp(prop, value) {
+  function coerceProp(prop, value){
     var coerce = prop.options.coerce;
     if (!coerce) {
       return value;
@@ -6274,7 +6291,7 @@ var template = Object.freeze({
    * @return {Object}
    */
 
-  function assertType(value, type) {
+  function assertType(value, type){
     var valid;
     var expectedType;
     if (type === String) {
@@ -6311,7 +6328,7 @@ var template = Object.freeze({
    * @return {String}
    */
 
-  function formatType(type) {
+  function formatType(type){
     return type ? type.charAt(0).toUpperCase() + type.slice(1) : 'custom type';
   }
 
@@ -6322,7 +6339,7 @@ var template = Object.freeze({
    * @return {String}
    */
 
-  function formatValue(val) {
+  function formatValue(val){
     return Object.prototype.toString.call(val).slice(8, -1);
   }
 
@@ -6330,7 +6347,7 @@ var template = Object.freeze({
 
   var propDef = {
 
-    bind: function bind() {
+    bind: function bind(){
       var child = this.vm;
       var parent = child._context;
       // passed in from compiler directly
@@ -6339,7 +6356,7 @@ var template = Object.freeze({
       var parentKey = prop.parentPath;
       var twoWay = prop.mode === bindingModes.TWO_WAY;
 
-      var parentWatcher = this.parentWatcher = new Watcher(parent, parentKey, function (val) {
+      var parentWatcher = this.parentWatcher = new Watcher(parent, parentKey, function (val){
         updateProp(child, prop, val);
       }, {
         twoWay: twoWay,
@@ -6357,8 +6374,8 @@ var template = Object.freeze({
         // important: defer the child watcher creation until
         // the created hook (after data observation)
         var self = this;
-        child.$once('pre-hook:created', function () {
-          self.childWatcher = new Watcher(child, childKey, function (val) {
+        child.$once('pre-hook:created', function (){
+          self.childWatcher = new Watcher(child, childKey, function (val){
             parentWatcher.set(val);
           }, {
             // ensure sync upward before parent sync down.
@@ -6370,7 +6387,7 @@ var template = Object.freeze({
       }
     },
 
-    unbind: function unbind() {
+    unbind: function unbind(){
       this.parentWatcher.teardown();
       if (this.childWatcher) {
         this.childWatcher.teardown();
@@ -6387,7 +6404,7 @@ var template = Object.freeze({
    * @param {Function} job
    */
 
-  function pushJob(job) {
+  function pushJob(job){
     queue$1.push(job);
     if (!queued) {
       queued = true;
@@ -6400,7 +6417,7 @@ var template = Object.freeze({
    * triggering transitions.
    */
 
-  function flush() {
+  function flush(){
     // Force layout
     var f = document.documentElement.offsetHeight;
     for (var i = 0; i < queue$1.length; i++) {
@@ -6435,12 +6452,12 @@ var template = Object.freeze({
 
   var raf = inBrowser && window.requestAnimationFrame;
   var waitForTransitionStart = raf
-  /* istanbul ignore next */
-  ? function (fn) {
-    raf(function () {
+    /* istanbul ignore next */
+    ? function (fn){
+    raf(function (){
       raf(fn);
     });
-  } : function (fn) {
+  } : function (fn){
     setTimeout(fn, 50);
   };
 
@@ -6453,7 +6470,7 @@ var template = Object.freeze({
    * @param {Object} hooks
    * @param {Vue} vm
    */
-  function Transition(el, id, hooks, vm) {
+  function Transition(el, id, hooks, vm){
     this.id = id;
     this.el = el;
     this.enterClass = hooks && hooks.enterClass || id + '-enter';
@@ -6474,7 +6491,8 @@ var template = Object.freeze({
       }
     }
     // bind
-    var self = this;['enterNextTick', 'enterDone', 'leaveNextTick', 'leaveDone'].forEach(function (m) {
+    var self = this;
+    ['enterNextTick', 'enterDone', 'leaveNextTick', 'leaveDone'].forEach(function (m){
       self[m] = bind(self[m], self);
     });
   }
@@ -6506,7 +6524,7 @@ var template = Object.freeze({
    * @param {Function} [cb]
    */
 
-  p$1.enter = function (op, cb) {
+  p$1.enter = function (op, cb){
     this.cancelPending();
     this.callHook('beforeEnter');
     this.cb = cb;
@@ -6527,12 +6545,12 @@ var template = Object.freeze({
    * that removing the class can trigger a CSS transition.
    */
 
-  p$1.enterNextTick = function () {
+  p$1.enterNextTick = function (){
     var _this = this;
 
     // prevent transition skipping
     this.justEntered = true;
-    waitForTransitionStart(function () {
+    waitForTransitionStart(function (){
       _this.justEntered = false;
     });
     var enterDone = this.enterDone;
@@ -6556,7 +6574,7 @@ var template = Object.freeze({
    * The "cleanup" phase of an entering transition.
    */
 
-  p$1.enterDone = function () {
+  p$1.enterDone = function (){
     this.entered = true;
     this.cancel = this.pendingJsCb = null;
     removeClass(this.el, this.enterClass);
@@ -6585,7 +6603,7 @@ var template = Object.freeze({
    * @param {Function} [cb]
    */
 
-  p$1.leave = function (op, cb) {
+  p$1.leave = function (op, cb){
     this.cancelPending();
     this.callHook('beforeLeave');
     this.op = op;
@@ -6617,7 +6635,7 @@ var template = Object.freeze({
    * The "nextTick" phase of a leaving transition.
    */
 
-  p$1.leaveNextTick = function () {
+  p$1.leaveNextTick = function (){
     var type = this.getCssTransitionType(this.leaveClass);
     if (type) {
       var event = type === TYPE_TRANSITION ? transitionEndEvent : animationEndEvent;
@@ -6631,7 +6649,7 @@ var template = Object.freeze({
    * The "cleanup" phase of a leaving transition.
    */
 
-  p$1.leaveDone = function () {
+  p$1.leaveDone = function (){
     this.left = true;
     this.cancel = this.pendingJsCb = null;
     this.op();
@@ -6646,7 +6664,7 @@ var template = Object.freeze({
    * but not finished transition.
    */
 
-  p$1.cancelPending = function () {
+  p$1.cancelPending = function (){
     this.op = this.cb = null;
     var hasPending = false;
     if (this.pendingCssCb) {
@@ -6675,7 +6693,7 @@ var template = Object.freeze({
    * @param {String} type
    */
 
-  p$1.callHook = function (type) {
+  p$1.callHook = function (type){
     if (this.hooks && this.hooks[type]) {
       this.hooks[type].call(this.vm, this.el);
     }
@@ -6692,7 +6710,7 @@ var template = Object.freeze({
    * @param {String} type
    */
 
-  p$1.callHookWithCb = function (type) {
+  p$1.callHookWithCb = function (type){
     var hook = this.hooks && this.hooks[type];
     if (hook) {
       if (hook.length > 1) {
@@ -6710,19 +6728,19 @@ var template = Object.freeze({
    * @return {Number}
    */
 
-  p$1.getCssTransitionType = function (className) {
+  p$1.getCssTransitionType = function (className){
     /* istanbul ignore if */
     if (!transitionEndEvent ||
-    // skip CSS transitions if page is not visible -
-    // this solves the issue of transitionend events not
-    // firing until the page is visible again.
-    // pageVisibility API is supported in IE10+, same as
-    // CSS transitions.
-    document.hidden ||
-    // explicit js-only transition
-    this.hooks && this.hooks.css === false ||
-    // element is hidden
-    isHidden(this.el)) {
+      // skip CSS transitions if page is not visible -
+      // this solves the issue of transitionend events not
+      // firing until the page is visible again.
+      // pageVisibility API is supported in IE10+, same as
+      // CSS transitions.
+      document.hidden ||
+      // explicit js-only transition
+      this.hooks && this.hooks.css === false ||
+      // element is hidden
+      isHidden(this.el)) {
       return;
     }
     var type = this.type || this.typeCache[className];
@@ -6751,11 +6769,11 @@ var template = Object.freeze({
    * @param {Function} cb
    */
 
-  p$1.setupCssCb = function (event, cb) {
+  p$1.setupCssCb = function (event, cb){
     this.pendingCssEvent = event;
     var self = this;
     var el = this.el;
-    var onEnd = this.pendingCssCb = function (e) {
+    var onEnd = this.pendingCssCb = function (e){
       if (e.target === el) {
         off(el, event, onEnd);
         self.pendingCssEvent = self.pendingCssCb = null;
@@ -6775,7 +6793,7 @@ var template = Object.freeze({
    * @return {Boolean}
    */
 
-  function isHidden(el) {
+  function isHidden(el){
     if (/svg$/.test(el.namespaceURI)) {
       // SVG elements do not have offset(Width|Height)
       // so we need to check the client rect
@@ -6790,7 +6808,7 @@ var template = Object.freeze({
 
     priority: TRANSITION,
 
-    update: function update(id, oldId) {
+    update: function update(id, oldId){
       var el = this.el;
       // resolve on owner vm
       var hooks = resolveAsset(this.vm.$options, 'transitions', id);
@@ -6839,7 +6857,7 @@ var template = Object.freeze({
    * @return {Function}
    */
 
-  function compile(el, options, partial) {
+  function compile(el, options, partial){
     // link function for the node itself.
     var nodeLinkFn = partial || !options._asComponent ? compileNode(el, options) : null;
     // link function for the childNodes
@@ -6858,11 +6876,11 @@ var template = Object.freeze({
      * @return {Function|undefined}
      */
 
-    return function compositeLinkFn(vm, el, host, scope, frag) {
+    return function compositeLinkFn(vm, el, host, scope, frag){
       // cache childNodes before linking parent, fix #657
       var childNodes = toArray(el.childNodes);
       // link
-      var dirs = linkAndCapture(function compositeLinkCapturer() {
+      var dirs = linkAndCapture(function compositeLinkCapturer(){
         if (nodeLinkFn) nodeLinkFn(vm, el, host, scope, frag);
         if (childLinkFn) childLinkFn(vm, childNodes, host, scope, frag);
       }, vm);
@@ -6878,7 +6896,7 @@ var template = Object.freeze({
    * @param {Vue} vm
    */
 
-  function linkAndCapture(linker, vm) {
+  function linkAndCapture(linker, vm){
     /* istanbul ignore if */
     if ('development' === 'production') {}
     var originalDirCount = vm._directives.length;
@@ -6898,7 +6916,7 @@ var template = Object.freeze({
    * @param {Object} b
    */
 
-  function directiveComparator(a, b) {
+  function directiveComparator(a, b){
     a = a.descriptor.def.priority || DEFAULT_PRIORITY;
     b = b.descriptor.def.priority || DEFAULT_PRIORITY;
     return a > b ? -1 : a === b ? 0 : 1;
@@ -6919,13 +6937,14 @@ var template = Object.freeze({
    * @return {Function}
    */
 
-  function makeUnlinkFn(vm, dirs, context, contextDirs) {
-    function unlink(destroying) {
+  function makeUnlinkFn(vm, dirs, context, contextDirs){
+    function unlink(destroying){
       teardownDirs(vm, dirs, destroying);
       if (context && contextDirs) {
         teardownDirs(context, contextDirs);
       }
     }
+
     // expose linked directives
     unlink.dirs = dirs;
     return unlink;
@@ -6939,7 +6958,7 @@ var template = Object.freeze({
    * @param {Boolean} destroying
    */
 
-  function teardownDirs(vm, dirs, destroying) {
+  function teardownDirs(vm, dirs, destroying){
     var i = dirs.length;
     while (i--) {
       dirs[i]._teardown();
@@ -6959,9 +6978,9 @@ var template = Object.freeze({
    * @return {Function}
    */
 
-  function compileAndLinkProps(vm, el, props, scope) {
+  function compileAndLinkProps(vm, el, props, scope){
     var propsLinkFn = compileProps(el, props, vm);
-    var propDirs = linkAndCapture(function () {
+    var propDirs = linkAndCapture(function (){
       propsLinkFn(vm, scope);
     }, vm);
     return makeUnlinkFn(vm, propDirs);
@@ -6982,7 +7001,7 @@ var template = Object.freeze({
    * @return {Function}
    */
 
-  function compileRoot(el, options, contextOptions) {
+  function compileRoot(el, options, contextOptions){
     var containerAttrs = options._containerAttrs;
     var replacerAttrs = options._replacerAttrs;
     var contextLinkFn, replacerLinkFn;
@@ -7007,14 +7026,14 @@ var template = Object.freeze({
       }
     } else if ('development' !== 'production' && containerAttrs) {
       // warn container directives for fragment instances
-      var names = containerAttrs.filter(function (attr) {
+      var names = containerAttrs.filter(function (attr){
         // allow vue-loader/vueify scoped css attributes
         return attr.name.indexOf('_v-') < 0 &&
-        // allow event listeners
-        !onRE.test(attr.name) &&
-        // allow slots
-        attr.name !== 'slot';
-      }).map(function (attr) {
+          // allow event listeners
+          !onRE.test(attr.name) &&
+          // allow slots
+          attr.name !== 'slot';
+      }).map(function (attr){
         return '"' + attr.name + '"';
       });
       if (names.length) {
@@ -7024,18 +7043,18 @@ var template = Object.freeze({
     }
 
     options._containerAttrs = options._replacerAttrs = null;
-    return function rootLinkFn(vm, el, scope) {
+    return function rootLinkFn(vm, el, scope){
       // link context scope dirs
       var context = vm._context;
       var contextDirs;
       if (context && contextLinkFn) {
-        contextDirs = linkAndCapture(function () {
+        contextDirs = linkAndCapture(function (){
           contextLinkFn(context, el, null, scope);
         }, context);
       }
 
       // link self
-      var selfDirs = linkAndCapture(function () {
+      var selfDirs = linkAndCapture(function (){
         if (replacerLinkFn) replacerLinkFn(vm, el);
       }, vm);
 
@@ -7054,7 +7073,7 @@ var template = Object.freeze({
    * @return {Function|null}
    */
 
-  function compileNode(node, options) {
+  function compileNode(node, options){
     var type = node.nodeType;
     if (type === 1 && !isScript(node)) {
       return compileElement(node, options);
@@ -7073,7 +7092,7 @@ var template = Object.freeze({
    * @return {Function|null}
    */
 
-  function compileElement(el, options) {
+  function compileElement(el, options){
     // preprocess textareas.
     // textarea treats its text content as the initial value.
     // just bind it as an attr directive for value.
@@ -7114,7 +7133,7 @@ var template = Object.freeze({
    * @return {Function|null} textNodeLinkFn
    */
 
-  function compileTextNode(node, options) {
+  function compileTextNode(node, options){
     // skip marked text nodes
     if (node._skip) {
       return removeText;
@@ -7153,7 +7172,7 @@ var template = Object.freeze({
    * @param {Text} node
    */
 
-  function removeText(vm, node) {
+  function removeText(vm, node){
     remove(node);
   }
 
@@ -7165,7 +7184,7 @@ var template = Object.freeze({
    * @return {Node}
    */
 
-  function processTextToken(token, options) {
+  function processTextToken(token, options){
     var el;
     if (token.oneTime) {
       el = document.createTextNode(token.value);
@@ -7181,7 +7200,7 @@ var template = Object.freeze({
         setTokenType('text');
       }
     }
-    function setTokenType(type) {
+    function setTokenType(type){
       if (token.descriptor) return;
       var parsed = parseDirective(token.value);
       token.descriptor = {
@@ -7191,6 +7210,7 @@ var template = Object.freeze({
         filters: parsed.filters
       };
     }
+
     return el;
   }
 
@@ -7201,8 +7221,8 @@ var template = Object.freeze({
    * @param {DocumentFragment} frag
    */
 
-  function makeTextNodeLinkFn(tokens, frag) {
-    return function textNodeLinkFn(vm, el, host, scope) {
+  function makeTextNodeLinkFn(tokens, frag){
+    return function textNodeLinkFn(vm, el, host, scope){
       var fragClone = frag.cloneNode(true);
       var childNodes = toArray(fragClone.childNodes);
       var token, value, node;
@@ -7235,7 +7255,7 @@ var template = Object.freeze({
    * @return {Function|undefined}
    */
 
-  function compileNodeList(nodeList, options) {
+  function compileNodeList(nodeList, options){
     var linkFns = [];
     var nodeLinkFn, childLinkFn, node;
     for (var i = 0, l = nodeList.length; i < l; i++) {
@@ -7254,8 +7274,8 @@ var template = Object.freeze({
    * @return {Function} childLinkFn
    */
 
-  function makeChildLinkFn(linkFns) {
-    return function childLinkFn(vm, nodes, host, scope, frag) {
+  function makeChildLinkFn(linkFns){
+    return function childLinkFn(vm, nodes, host, scope, frag){
       var node, nodeLinkFn, childrenLinkFn;
       for (var i = 0, n = 0, l = linkFns.length; i < l; n++) {
         node = nodes[n];
@@ -7281,7 +7301,7 @@ var template = Object.freeze({
    * @param {Object} options
    */
 
-  function checkElementDirectives(el, options) {
+  function checkElementDirectives(el, options){
     var tag = el.tagName.toLowerCase();
     if (commonTagRE.test(tag)) {
       return;
@@ -7301,7 +7321,7 @@ var template = Object.freeze({
    * @return {Function|undefined}
    */
 
-  function checkComponent(el, options) {
+  function checkComponent(el, options){
     var component = checkComponentAttr(el, options);
     if (component) {
       var ref = findRef(el);
@@ -7314,7 +7334,7 @@ var template = Object.freeze({
           literal: !component.dynamic
         }
       };
-      var componentLinkFn = function componentLinkFn(vm, el, host, scope, frag) {
+      var componentLinkFn = function componentLinkFn(vm, el, host, scope, frag){
         if (ref) {
           defineReactive((scope || vm).$refs, ref, null);
         }
@@ -7335,7 +7355,7 @@ var template = Object.freeze({
    * @return {Function} terminalLinkFn
    */
 
-  function checkTerminalDirectives(el, attrs, options) {
+  function checkTerminalDirectives(el, attrs, options){
     // skip v-pre
     if (getAttr(el, 'v-pre') !== null) {
       return skip;
@@ -7372,7 +7392,8 @@ var template = Object.freeze({
     }
   }
 
-  function skip() {}
+  function skip(){}
+
   skip.terminal = true;
 
   /**
@@ -7392,7 +7413,7 @@ var template = Object.freeze({
    * @return {Function} terminalLinkFn
    */
 
-  function makeTerminalNodeLinkFn(el, dirName, value, options, def, rawName, arg, modifiers) {
+  function makeTerminalNodeLinkFn(el, dirName, value, options, def, rawName, arg, modifiers){
     var parsed = parseDirective(value);
     var descriptor = {
       name: dirName,
@@ -7408,7 +7429,7 @@ var template = Object.freeze({
     if (dirName === 'for' || dirName === 'router-view') {
       descriptor.ref = findRef(el);
     }
-    var fn = function terminalNodeLinkFn(vm, el, host, scope, frag) {
+    var fn = function terminalNodeLinkFn(vm, el, host, scope, frag){
       if (descriptor.ref) {
         defineReactive((scope || vm).$refs, descriptor.ref, null);
       }
@@ -7426,7 +7447,7 @@ var template = Object.freeze({
    * @return {Function}
    */
 
-  function compileDirectives(attrs, options) {
+  function compileDirectives(attrs, options){
     var i = attrs.length;
     var dirs = [];
     var attr, name, value, rawName, rawValue, dirName, arg, modifiers, dirDef, tokens, matched;
@@ -7448,52 +7469,52 @@ var template = Object.freeze({
         pushDir('bind', directives.bind, tokens);
         // warn against mixing mustaches with v-bind
         if ('development' !== 'production') {
-          if (name === 'class' && Array.prototype.some.call(attrs, function (attr) {
-            return attr.name === ':class' || attr.name === 'v-bind:class';
-          })) {
+          if (name === 'class' && Array.prototype.some.call(attrs, function (attr){
+              return attr.name === ':class' || attr.name === 'v-bind:class';
+            })) {
             warn('class="' + rawValue + '": Do not mix mustache interpolation ' + 'and v-bind for "class" on the same element. Use one or the other.', options);
           }
         }
       } else
 
-        // special attribute: transition
-        if (transitionRE.test(name)) {
-          modifiers.literal = !bindRE.test(name);
-          pushDir('transition', internalDirectives.transition);
-        } else
+      // special attribute: transition
+      if (transitionRE.test(name)) {
+        modifiers.literal = !bindRE.test(name);
+        pushDir('transition', internalDirectives.transition);
+      } else
 
-          // event handlers
-          if (onRE.test(name)) {
-            arg = name.replace(onRE, '');
-            pushDir('on', directives.on);
-          } else
+      // event handlers
+      if (onRE.test(name)) {
+        arg = name.replace(onRE, '');
+        pushDir('on', directives.on);
+      } else
 
-            // attribute bindings
-            if (bindRE.test(name)) {
-              dirName = name.replace(bindRE, '');
-              if (dirName === 'style' || dirName === 'class') {
-                pushDir(dirName, internalDirectives[dirName]);
-              } else {
-                arg = dirName;
-                pushDir('bind', directives.bind);
-              }
-            } else
+      // attribute bindings
+      if (bindRE.test(name)) {
+        dirName = name.replace(bindRE, '');
+        if (dirName === 'style' || dirName === 'class') {
+          pushDir(dirName, internalDirectives[dirName]);
+        } else {
+          arg = dirName;
+          pushDir('bind', directives.bind);
+        }
+      } else
 
-              // normal directives
-              if (matched = name.match(dirAttrRE)) {
-                dirName = matched[1];
-                arg = matched[2];
+      // normal directives
+      if (matched = name.match(dirAttrRE)) {
+        dirName = matched[1];
+        arg = matched[2];
 
-                // skip v-else (when used with v-show)
-                if (dirName === 'else') {
-                  continue;
-                }
+        // skip v-else (when used with v-show)
+        if (dirName === 'else') {
+          continue;
+        }
 
-                dirDef = resolveAsset(options, 'directives', dirName, true);
-                if (dirDef) {
-                  pushDir(dirName, dirDef);
-                }
-              }
+        dirDef = resolveAsset(options, 'directives', dirName, true);
+        if (dirDef) {
+          pushDir(dirName, dirDef);
+        }
+      }
     }
 
     /**
@@ -7504,7 +7525,7 @@ var template = Object.freeze({
      * @param {Array} [interpTokens]
      */
 
-    function pushDir(dirName, def, interpTokens) {
+    function pushDir(dirName, def, interpTokens){
       var hasOneTimeToken = interpTokens && hasOneTime(interpTokens);
       var parsed = !hasOneTimeToken && parseDirective(value);
       dirs.push({
@@ -7536,7 +7557,7 @@ var template = Object.freeze({
    * @return {Object}
    */
 
-  function parseModifiers(name) {
+  function parseModifiers(name){
     var res = Object.create(null);
     var match = name.match(modifierRE);
     if (match) {
@@ -7555,8 +7576,8 @@ var template = Object.freeze({
    * @return {Function} directivesLinkFn
    */
 
-  function makeNodeLinkFn(directives) {
-    return function nodeLinkFn(vm, el, host, scope, frag) {
+  function makeNodeLinkFn(directives){
+    return function nodeLinkFn(vm, el, host, scope, frag){
       // reverse apply because it's sorted low to high
       var i = directives.length;
       while (i--) {
@@ -7572,14 +7593,14 @@ var template = Object.freeze({
    * @return {Boolean}
    */
 
-  function hasOneTime(tokens) {
+  function hasOneTime(tokens){
     var i = tokens.length;
     while (i--) {
       if (tokens[i].oneTime) return true;
     }
   }
 
-  function isScript(el) {
+  function isScript(el){
     return el.tagName === 'SCRIPT' && (!el.hasAttribute('type') || el.getAttribute('type') === 'text/javascript');
   }
 
@@ -7597,7 +7618,7 @@ var template = Object.freeze({
    * @return {Element|DocumentFragment}
    */
 
-  function transclude(el, options) {
+  function transclude(el, options){
     // extract container attributes to pass them down
     // to compiler, because they need to be compiled in
     // parent scope. we are mutating the options object here
@@ -7639,7 +7660,7 @@ var template = Object.freeze({
    * @return {Element|DocumentFragment}
    */
 
-  function transcludeTemplate(el, options) {
+  function transcludeTemplate(el, options){
     var template = options.template;
     var frag = parseTemplate(template, true);
     if (frag) {
@@ -7654,7 +7675,7 @@ var template = Object.freeze({
         // become a fragment instance: basically anything that
         // can create more than 1 root nodes.
         if (
-        // multi-children template
+          // multi-children template
         frag.childNodes.length > 1 ||
         // non-element template
         replacer.nodeType !== 1 ||
@@ -7689,7 +7710,7 @@ var template = Object.freeze({
    * @return {Array}
    */
 
-  function extractAttrs(el) {
+  function extractAttrs(el){
     if (el.nodeType === 1 && el.hasAttributes()) {
       return toArray(el.attributes);
     }
@@ -7703,7 +7724,7 @@ var template = Object.freeze({
    * @param {Element} to
    */
 
-  function mergeAttrs(from, to) {
+  function mergeAttrs(from, to){
     var attrs = from.attributes;
     var i = attrs.length;
     var name, value;
@@ -7713,7 +7734,7 @@ var template = Object.freeze({
       if (!to.hasAttribute(name) && !specialCharRE.test(name)) {
         to.setAttribute(name, value);
       } else if (name === 'class' && !parseText(value) && (value = value.trim())) {
-        value.split(/\s+/).forEach(function (cls) {
+        value.split(/\s+/).forEach(function (cls){
           addClass(to, cls);
         });
       }
@@ -7731,7 +7752,7 @@ var template = Object.freeze({
    * @param {Vue} vm
    */
 
-  function resolveSlots(vm, content) {
+  function resolveSlots(vm, content){
     if (!content) {
       return;
     }
@@ -7767,7 +7788,7 @@ var template = Object.freeze({
    * @return {DocumentFragment}
    */
 
-  function extractFragment(nodes, parent) {
+  function extractFragment(nodes, parent){
     var frag = document.createDocumentFragment();
     nodes = toArray(nodes);
     for (var i = 0, l = nodes.length; i < l; i++) {
@@ -7781,17 +7802,15 @@ var template = Object.freeze({
     return frag;
   }
 
-
-
   var compiler = Object.freeze({
-  	compile: compile,
-  	compileAndLinkProps: compileAndLinkProps,
-  	compileRoot: compileRoot,
-  	transclude: transclude,
-  	resolveSlots: resolveSlots
+    compile: compile,
+    compileAndLinkProps: compileAndLinkProps,
+    compileRoot: compileRoot,
+    transclude: transclude,
+    resolveSlots: resolveSlots
   });
 
-  function stateMixin (Vue) {
+  function stateMixin(Vue){
     /**
      * Accessor for `$data` property, since setting $data
      * requires observing the new object and updating
@@ -7799,10 +7818,10 @@ var template = Object.freeze({
      */
 
     Object.defineProperty(Vue.prototype, '$data', {
-      get: function get() {
+      get: function get(){
         return this._data;
       },
-      set: function set(newData) {
+      set: function set(newData){
         if (newData !== this._data) {
           this._setData(newData);
         }
@@ -7817,7 +7836,7 @@ var template = Object.freeze({
      * - meta properties
      */
 
-    Vue.prototype._initState = function () {
+    Vue.prototype._initState = function (){
       this._initProps();
       this._initMeta();
       this._initMethods();
@@ -7829,7 +7848,7 @@ var template = Object.freeze({
      * Initialize props.
      */
 
-    Vue.prototype._initProps = function () {
+    Vue.prototype._initProps = function (){
       var options = this.$options;
       var el = options.el;
       var props = options.props;
@@ -7839,15 +7858,15 @@ var template = Object.freeze({
       // make sure to convert string selectors into element now
       el = options.el = query(el);
       this._propsUnlinkFn = el && el.nodeType === 1 && props
-      // props must be linked in proper scope if inside v-for
-      ? compileAndLinkProps(this, el, props, this._scope) : null;
+        // props must be linked in proper scope if inside v-for
+        ? compileAndLinkProps(this, el, props, this._scope) : null;
     };
 
     /**
      * Initialize the data.
      */
 
-    Vue.prototype._initData = function () {
+    Vue.prototype._initData = function (){
       var dataFn = this.$options.data;
       var data = this._data = dataFn ? dataFn() : {};
       if (!isPlainObject(data)) {
@@ -7881,7 +7900,7 @@ var template = Object.freeze({
      * @param {Object} newData
      */
 
-    Vue.prototype._setData = function (newData) {
+    Vue.prototype._setData = function (newData){
       newData = newData || {};
       var oldData = this._data;
       this._data = newData;
@@ -7918,7 +7937,7 @@ var template = Object.freeze({
      * @param {String} key
      */
 
-    Vue.prototype._proxy = function (key) {
+    Vue.prototype._proxy = function (key){
       if (!isReserved(key)) {
         // need to store ref to self here
         // because these getter/setters might
@@ -7928,10 +7947,10 @@ var template = Object.freeze({
         Object.defineProperty(self, key, {
           configurable: true,
           enumerable: true,
-          get: function proxyGetter() {
+          get: function proxyGetter(){
             return self._data[key];
           },
-          set: function proxySetter(val) {
+          set: function proxySetter(val){
             self._data[key] = val;
           }
         });
@@ -7944,7 +7963,7 @@ var template = Object.freeze({
      * @param {String} key
      */
 
-    Vue.prototype._unproxy = function (key) {
+    Vue.prototype._unproxy = function (key){
       if (!isReserved(key)) {
         delete this[key];
       }
@@ -7954,7 +7973,7 @@ var template = Object.freeze({
      * Force update on every watcher in scope.
      */
 
-    Vue.prototype._digest = function () {
+    Vue.prototype._digest = function (){
       for (var i = 0, l = this._watchers.length; i < l; i++) {
         this._watchers[i].update(true); // shallow updates
       }
@@ -7965,8 +7984,9 @@ var template = Object.freeze({
      * special getter/setters
      */
 
-    function noop() {}
-    Vue.prototype._initComputed = function () {
+    function noop(){}
+
+    Vue.prototype._initComputed = function (){
       var computed = this.$options.computed;
       if (computed) {
         for (var key in computed) {
@@ -7987,11 +8007,11 @@ var template = Object.freeze({
       }
     };
 
-    function makeComputedGetter(getter, owner) {
+    function makeComputedGetter(getter, owner){
       var watcher = new Watcher(owner, getter, null, {
         lazy: true
       });
-      return function computedGetter() {
+      return function computedGetter(){
         if (watcher.dirty) {
           watcher.evaluate();
         }
@@ -8008,7 +8028,7 @@ var template = Object.freeze({
      * child components.
      */
 
-    Vue.prototype._initMethods = function () {
+    Vue.prototype._initMethods = function (){
       var methods = this.$options.methods;
       if (methods) {
         for (var key in methods) {
@@ -8021,7 +8041,7 @@ var template = Object.freeze({
      * Initialize meta information like $index, $key & $value.
      */
 
-    Vue.prototype._initMeta = function () {
+    Vue.prototype._initMeta = function (){
       var metas = this.$options._meta;
       if (metas) {
         for (var key in metas) {
@@ -8033,14 +8053,14 @@ var template = Object.freeze({
 
   var eventRE = /^v-on:|^@/;
 
-  function eventsMixin (Vue) {
+  function eventsMixin(Vue){
     /**
      * Setup the instance's option events & watchers.
      * If the value is a string, we pull it from the
      * instance's methods by name.
      */
 
-    Vue.prototype._initEvents = function () {
+    Vue.prototype._initEvents = function (){
       var options = this.$options;
       if (options._asComponent) {
         registerComponentEvents(this, options.el);
@@ -8056,7 +8076,7 @@ var template = Object.freeze({
      * @param {Element} el
      */
 
-    function registerComponentEvents(vm, el) {
+    function registerComponentEvents(vm, el){
       var attrs = el.attributes;
       var name, value, handler;
       for (var i = 0, l = attrs.length; i < l; i++) {
@@ -8085,7 +8105,7 @@ var template = Object.freeze({
      * @param {Object} hash
      */
 
-    function registerCallbacks(vm, action, hash) {
+    function registerCallbacks(vm, action, hash){
       if (!hash) return;
       var handlers, key, i, j;
       for (key in hash) {
@@ -8110,7 +8130,7 @@ var template = Object.freeze({
      * @param {Object} [options]
      */
 
-    function register(vm, action, key, handler, options) {
+    function register(vm, action, key, handler, options){
       var type = typeof handler;
       if (type === 'function') {
         vm[action](key, handler, options);
@@ -8131,7 +8151,7 @@ var template = Object.freeze({
      * Setup recursive attached/detached calls
      */
 
-    Vue.prototype._initDOMHooks = function () {
+    Vue.prototype._initDOMHooks = function (){
       this.$on('hook:attached', onAttached);
       this.$on('hook:detached', onDetached);
     };
@@ -8140,7 +8160,7 @@ var template = Object.freeze({
      * Callback to recursively call attached hook on children
      */
 
-    function onAttached() {
+    function onAttached(){
       if (!this._isAttached) {
         this._isAttached = true;
         this.$children.forEach(callAttach);
@@ -8153,7 +8173,7 @@ var template = Object.freeze({
      * @param {Vue} child
      */
 
-    function callAttach(child) {
+    function callAttach(child){
       if (!child._isAttached && inDoc(child.$el)) {
         child._callHook('attached');
       }
@@ -8163,7 +8183,7 @@ var template = Object.freeze({
      * Callback to recursively call detached hook on children
      */
 
-    function onDetached() {
+    function onDetached(){
       if (this._isAttached) {
         this._isAttached = false;
         this.$children.forEach(callDetach);
@@ -8176,7 +8196,7 @@ var template = Object.freeze({
      * @param {Vue} child
      */
 
-    function callDetach(child) {
+    function callDetach(child){
       if (child._isAttached && !inDoc(child.$el)) {
         child._callHook('detached');
       }
@@ -8188,7 +8208,7 @@ var template = Object.freeze({
      * @param {String} hook
      */
 
-    Vue.prototype._callHook = function (hook) {
+    Vue.prototype._callHook = function (hook){
       this.$emit('pre-hook:' + hook);
       var handlers = this.$options[hook];
       if (handlers) {
@@ -8200,7 +8220,7 @@ var template = Object.freeze({
     };
   }
 
-  function noop() {}
+  function noop(){}
 
   /**
    * A directive links a DOM element with a piece of data,
@@ -8228,7 +8248,7 @@ var template = Object.freeze({
    * @param {Fragment} [frag] - owner fragment
    * @constructor
    */
-  function Directive(descriptor, vm, el, host, scope, frag) {
+  function Directive(descriptor, vm, el, host, scope, frag){
     this.vm = vm;
     this.el = el;
     // copy descriptor properties
@@ -8260,7 +8280,7 @@ var template = Object.freeze({
    * if present.
    */
 
-  Directive.prototype._bind = function () {
+  Directive.prototype._bind = function (){
     var name = this.name;
     var descriptor = this.descriptor;
 
@@ -8293,7 +8313,7 @@ var template = Object.freeze({
       // wrapped updater for context
       var dir = this;
       if (this.update) {
-        this._update = function (val, oldVal) {
+        this._update = function (val, oldVal){
           if (!dir._locked) {
             dir.update(val, oldVal);
           }
@@ -8304,14 +8324,14 @@ var template = Object.freeze({
       var preProcess = this._preProcess ? bind(this._preProcess, this) : null;
       var postProcess = this._postProcess ? bind(this._postProcess, this) : null;
       var watcher = this._watcher = new Watcher(this.vm, this.expression, this._update, // callback
-      {
-        filters: this.filters,
-        twoWay: this.twoWay,
-        deep: this.deep,
-        preProcess: preProcess,
-        postProcess: postProcess,
-        scope: this._scope
-      });
+        {
+          filters: this.filters,
+          twoWay: this.twoWay,
+          deep: this.deep,
+          preProcess: preProcess,
+          postProcess: postProcess,
+          scope: this._scope
+        });
       // v-model with inital inline value need to sync back to
       // model instead of update to DOM on init. They would
       // set the afterBind hook to indicate that.
@@ -8328,7 +8348,7 @@ var template = Object.freeze({
    * transition-mode, etc...
    */
 
-  Directive.prototype._setupParams = function () {
+  Directive.prototype._setupParams = function (){
     if (!this.params) {
       return;
     }
@@ -8361,10 +8381,10 @@ var template = Object.freeze({
    * @param {String} expression
    */
 
-  Directive.prototype._setupParamWatcher = function (key, expression) {
+  Directive.prototype._setupParamWatcher = function (key, expression){
     var self = this;
     var called = false;
-    var unwatch = (this._scope || this.vm).$watch(expression, function (val, oldVal) {
+    var unwatch = (this._scope || this.vm).$watch(expression, function (val, oldVal){
       self.params[key] = val;
       // since we are in immediate mode,
       // only call the param change callbacks if this is not the first update.
@@ -8379,7 +8399,8 @@ var template = Object.freeze({
     }, {
       immediate: true,
       user: false
-    });(this._paramUnwatchFns || (this._paramUnwatchFns = [])).push(unwatch);
+    });
+    (this._paramUnwatchFns || (this._paramUnwatchFns = [])).push(unwatch);
   };
 
   /**
@@ -8393,12 +8414,12 @@ var template = Object.freeze({
    * @return {Boolean}
    */
 
-  Directive.prototype._checkStatement = function () {
+  Directive.prototype._checkStatement = function (){
     var expression = this.expression;
     if (expression && this.acceptStatement && !isSimplePath(expression)) {
       var fn = parseExpression(expression).get;
       var scope = this._scope || this.vm;
-      var handler = function handler(e) {
+      var handler = function handler(e){
         scope.$event = e;
         fn.call(scope, scope);
         scope.$event = null;
@@ -8420,10 +8441,10 @@ var template = Object.freeze({
    * @public
    */
 
-  Directive.prototype.set = function (value) {
+  Directive.prototype.set = function (value){
     /* istanbul ignore else */
     if (this.twoWay) {
-      this._withLock(function () {
+      this._withLock(function (){
         this._watcher.set(value);
       });
     } else if ('development' !== 'production') {
@@ -8438,11 +8459,11 @@ var template = Object.freeze({
    * @param {Function} fn
    */
 
-  Directive.prototype._withLock = function (fn) {
+  Directive.prototype._withLock = function (fn){
     var self = this;
     self._locked = true;
     fn.call(self);
-    nextTick(function () {
+    nextTick(function (){
       self._locked = false;
     });
   };
@@ -8457,15 +8478,16 @@ var template = Object.freeze({
    * @param {Boolean} [useCapture]
    */
 
-  Directive.prototype.on = function (event, handler, useCapture) {
-    on(this.el, event, handler, useCapture);(this._listeners || (this._listeners = [])).push([event, handler]);
+  Directive.prototype.on = function (event, handler, useCapture){
+    on(this.el, event, handler, useCapture);
+    (this._listeners || (this._listeners = [])).push([event, handler]);
   };
 
   /**
    * Teardown the watcher and call unbind.
    */
 
-  Directive.prototype._teardown = function () {
+  Directive.prototype._teardown = function (){
     if (this._bound) {
       this._bound = false;
       if (this.unbind) {
@@ -8496,14 +8518,14 @@ var template = Object.freeze({
     }
   };
 
-  function lifecycleMixin (Vue) {
+  function lifecycleMixin(Vue){
     /**
      * Update v-ref for component.
      *
      * @param {Boolean} remove
      */
 
-    Vue.prototype._updateRef = function (remove) {
+    Vue.prototype._updateRef = function (remove){
       var ref = this.$options._ref;
       if (ref) {
         var refs = (this._scope || this._context).$refs;
@@ -8529,7 +8551,7 @@ var template = Object.freeze({
      * @param {Element} el
      */
 
-    Vue.prototype._compile = function (el) {
+    Vue.prototype._compile = function (el){
       var options = this.$options;
 
       // transclude and init element
@@ -8573,7 +8595,7 @@ var template = Object.freeze({
 
       // register composite unlink function
       // to be called during instance destruction
-      this._unlinkFn = function () {
+      this._unlinkFn = function (){
         rootUnlinkFn();
         // passing destroying: true to avoid searching and
         // splicing the directives
@@ -8596,7 +8618,7 @@ var template = Object.freeze({
      * @param {Element} el
      */
 
-    Vue.prototype._initElement = function (el) {
+    Vue.prototype._initElement = function (el){
       if (isFragment(el)) {
         this._isFragment = true;
         this.$el = this._fragmentStart = el.firstChild;
@@ -8623,7 +8645,7 @@ var template = Object.freeze({
      * @param {Fragment} [frag] - owner fragment
      */
 
-    Vue.prototype._bindDir = function (descriptor, node, host, scope, frag) {
+    Vue.prototype._bindDir = function (descriptor, node, host, scope, frag){
       this._directives.push(new Directive(descriptor, this, node, host, scope, frag));
     };
 
@@ -8636,7 +8658,7 @@ var template = Object.freeze({
      *                                 be called later
      */
 
-    Vue.prototype._destroy = function (remove, deferCleanup) {
+    Vue.prototype._destroy = function (remove, deferCleanup){
       if (this._isBeingDestroyed) {
         if (!deferCleanup) {
           this._cleanup();
@@ -8652,7 +8674,7 @@ var template = Object.freeze({
       // callback of this.$remove(), or if remove and deferCleanup are false.
       // In any case it should be called after all other removing, unbinding and
       // turning of is done
-      var cleanupIfPossible = function cleanupIfPossible() {
+      var cleanupIfPossible = function cleanupIfPossible(){
         if (destroyReady && !pendingRemoval && !deferCleanup) {
           self._cleanup();
         }
@@ -8661,7 +8683,7 @@ var template = Object.freeze({
       // remove DOM element
       if (remove && this.$el) {
         pendingRemoval = true;
-        this.$remove(function () {
+        this.$remove(function (){
           pendingRemoval = false;
           cleanupIfPossible();
         });
@@ -8711,7 +8733,7 @@ var template = Object.freeze({
      * is any.
      */
 
-    Vue.prototype._cleanup = function () {
+    Vue.prototype._cleanup = function (){
       if (this._isDestroyed) {
         return;
       }
@@ -8743,7 +8765,7 @@ var template = Object.freeze({
     };
   }
 
-  function miscMixin (Vue) {
+  function miscMixin(Vue){
     /**
      * Apply a list of filter (descriptors) to a value.
      * Using plain for loops here because this will be called in
@@ -8757,7 +8779,7 @@ var template = Object.freeze({
      * @return {*}
      */
 
-    Vue.prototype._applyFilters = function (value, oldValue, filters, write) {
+    Vue.prototype._applyFilters = function (value, oldValue, filters, write){
       var filter, fn, args, arg, offset, i, l, j, k;
       for (i = 0, l = filters.length; i < l; i++) {
         filter = filters[write ? l - i - 1 : i];
@@ -8789,7 +8811,7 @@ var template = Object.freeze({
      * @param {Function} cb
      */
 
-    Vue.prototype._resolveComponent = function (value, cb) {
+    Vue.prototype._resolveComponent = function (value, cb){
       var factory;
       if (typeof value === 'function') {
         factory = value;
@@ -8811,7 +8833,7 @@ var template = Object.freeze({
         } else {
           factory.requested = true;
           var cbs = factory.pendingCallbacks = [cb];
-          factory.call(this, function resolve(res) {
+          factory.call(this, function resolve(res){
             if (isPlainObject(res)) {
               res = Vue.extend(res);
             }
@@ -8821,7 +8843,7 @@ var template = Object.freeze({
             for (var i = 0, l = cbs.length; i < l; i++) {
               cbs[i](res);
             }
-          }, function reject(reason) {
+          }, function reject(reason){
             'development' !== 'production' && warn('Failed to resolve async component' + (typeof value === 'string' ? ': ' + value : '') + '. ' + (reason ? '\nReason: ' + reason : ''));
           });
         }
@@ -8834,7 +8856,7 @@ var template = Object.freeze({
 
   var filterRE$1 = /[^|]\|[^|]/;
 
-  function dataAPI (Vue) {
+  function dataAPI(Vue){
     /**
      * Get the value from an expression on this vm.
      *
@@ -8843,12 +8865,12 @@ var template = Object.freeze({
      * @return {*}
      */
 
-    Vue.prototype.$get = function (exp, asStatement) {
+    Vue.prototype.$get = function (exp, asStatement){
       var res = parseExpression(exp);
       if (res) {
         if (asStatement) {
           var self = this;
-          return function statementHandler() {
+          return function statementHandler(){
             self.$arguments = toArray(arguments);
             var result = res.get.call(self, self);
             self.$arguments = null;
@@ -8871,7 +8893,7 @@ var template = Object.freeze({
      * @param {*} val
      */
 
-    Vue.prototype.$set = function (exp, val) {
+    Vue.prototype.$set = function (exp, val){
       var res = parseExpression(exp, true);
       if (res && res.set) {
         res.set.call(this, this, val);
@@ -8884,7 +8906,7 @@ var template = Object.freeze({
      * @param {String} key
      */
 
-    Vue.prototype.$delete = function (key) {
+    Vue.prototype.$delete = function (key){
       del(this._data, key);
     };
 
@@ -8900,7 +8922,7 @@ var template = Object.freeze({
      * @return {Function} - unwatchFn
      */
 
-    Vue.prototype.$watch = function (expOrFn, cb, options) {
+    Vue.prototype.$watch = function (expOrFn, cb, options){
       var vm = this;
       var parsed;
       if (typeof expOrFn === 'string') {
@@ -8916,7 +8938,7 @@ var template = Object.freeze({
       if (options && options.immediate) {
         cb.call(vm, watcher.value);
       }
-      return function unwatchFn() {
+      return function unwatchFn(){
         watcher.teardown();
       };
     };
@@ -8929,7 +8951,7 @@ var template = Object.freeze({
      * @return {String}
      */
 
-    Vue.prototype.$eval = function (text, asStatement) {
+    Vue.prototype.$eval = function (text, asStatement){
       // check for filters.
       if (filterRE$1.test(text)) {
         var dir = parseDirective(text);
@@ -8951,14 +8973,14 @@ var template = Object.freeze({
      * @return {String}
      */
 
-    Vue.prototype.$interpolate = function (text) {
+    Vue.prototype.$interpolate = function (text){
       var tokens = parseText(text);
       var vm = this;
       if (tokens) {
         if (tokens.length === 1) {
           return vm.$eval(tokens[0].value) + '';
         } else {
-          return tokens.map(function (token) {
+          return tokens.map(function (token){
             return token.tag ? vm.$eval(token.value) : token.value;
           }).join('');
         }
@@ -8975,7 +8997,7 @@ var template = Object.freeze({
      * @param {String} [path]
      */
 
-    Vue.prototype.$log = function (path) {
+    Vue.prototype.$log = function (path){
       var data = path ? getPath(this._data, path) : this._data;
       if (data) {
         data = clean(data);
@@ -9003,12 +9025,12 @@ var template = Object.freeze({
      * @return {Object}
      */
 
-    function clean(obj) {
+    function clean(obj){
       return JSON.parse(JSON.stringify(obj));
     }
   }
 
-  function domAPI (Vue) {
+  function domAPI(Vue){
     /**
      * Convenience on-instance nextTick. The callback is
      * auto-bound to the instance, and this avoids component
@@ -9017,7 +9039,7 @@ var template = Object.freeze({
      * @param {Function} fn
      */
 
-    Vue.prototype.$nextTick = function (fn) {
+    Vue.prototype.$nextTick = function (fn){
       nextTick(fn, this);
     };
 
@@ -9029,7 +9051,7 @@ var template = Object.freeze({
      * @param {Boolean} [withTransition] - defaults to true
      */
 
-    Vue.prototype.$appendTo = function (target, cb, withTransition) {
+    Vue.prototype.$appendTo = function (target, cb, withTransition){
       return insert(this, target, cb, withTransition, append, appendWithTransition);
     };
 
@@ -9041,7 +9063,7 @@ var template = Object.freeze({
      * @param {Boolean} [withTransition] - defaults to true
      */
 
-    Vue.prototype.$prependTo = function (target, cb, withTransition) {
+    Vue.prototype.$prependTo = function (target, cb, withTransition){
       target = query(target);
       if (target.hasChildNodes()) {
         this.$before(target.firstChild, cb, withTransition);
@@ -9059,7 +9081,7 @@ var template = Object.freeze({
      * @param {Boolean} [withTransition] - defaults to true
      */
 
-    Vue.prototype.$before = function (target, cb, withTransition) {
+    Vue.prototype.$before = function (target, cb, withTransition){
       return insert(this, target, cb, withTransition, beforeWithCb, beforeWithTransition);
     };
 
@@ -9071,7 +9093,7 @@ var template = Object.freeze({
      * @param {Boolean} [withTransition] - defaults to true
      */
 
-    Vue.prototype.$after = function (target, cb, withTransition) {
+    Vue.prototype.$after = function (target, cb, withTransition){
       target = query(target);
       if (target.nextSibling) {
         this.$before(target.nextSibling, cb, withTransition);
@@ -9088,7 +9110,7 @@ var template = Object.freeze({
      * @param {Boolean} [withTransition] - defaults to true
      */
 
-    Vue.prototype.$remove = function (cb, withTransition) {
+    Vue.prototype.$remove = function (cb, withTransition){
       if (!this.$el.parentNode) {
         return cb && cb();
       }
@@ -9097,7 +9119,7 @@ var template = Object.freeze({
       // for transitions
       if (!inDocument) withTransition = false;
       var self = this;
-      var realCb = function realCb() {
+      var realCb = function realCb(){
         if (inDocument) self._callHook('detached');
         if (cb) cb();
       };
@@ -9122,13 +9144,13 @@ var template = Object.freeze({
      * @return vm
      */
 
-    function insert(vm, target, cb, withTransition, op1, op2) {
+    function insert(vm, target, cb, withTransition, op1, op2){
       target = query(target);
       var targetIsDetached = !inDoc(target);
       var op = withTransition === false || targetIsDetached ? op1 : op2;
       var shouldCallHook = !targetIsDetached && !vm._isAttached && !inDoc(vm.$el);
       if (vm._isFragment) {
-        mapNodeRange(vm._fragmentStart, vm._fragmentEnd, function (node) {
+        mapNodeRange(vm._fragmentStart, vm._fragmentEnd, function (node){
           op(node, target, vm);
         });
         cb && cb();
@@ -9147,7 +9169,7 @@ var template = Object.freeze({
      * @param {String|Element} el
      */
 
-    function query(el) {
+    function query(el){
       return typeof el === 'string' ? document.querySelector(el) : el;
     }
 
@@ -9160,7 +9182,7 @@ var template = Object.freeze({
      * @param {Function} [cb]
      */
 
-    function append(el, target, vm, cb) {
+    function append(el, target, vm, cb){
       target.appendChild(el);
       if (cb) cb();
     }
@@ -9174,7 +9196,7 @@ var template = Object.freeze({
      * @param {Function} [cb]
      */
 
-    function beforeWithCb(el, target, vm, cb) {
+    function beforeWithCb(el, target, vm, cb){
       before(el, target);
       if (cb) cb();
     }
@@ -9187,13 +9209,13 @@ var template = Object.freeze({
      * @param {Function} [cb]
      */
 
-    function removeWithCb(el, vm, cb) {
+    function removeWithCb(el, vm, cb){
       remove(el);
       if (cb) cb();
     }
   }
 
-  function eventsAPI (Vue) {
+  function eventsAPI(Vue){
     /**
      * Listen on the given `event` with `fn`.
      *
@@ -9201,7 +9223,7 @@ var template = Object.freeze({
      * @param {Function} fn
      */
 
-    Vue.prototype.$on = function (event, fn) {
+    Vue.prototype.$on = function (event, fn){
       (this._events[event] || (this._events[event] = [])).push(fn);
       modifyListenerCount(this, event, 1);
       return this;
@@ -9215,12 +9237,14 @@ var template = Object.freeze({
      * @param {Function} fn
      */
 
-    Vue.prototype.$once = function (event, fn) {
+    Vue.prototype.$once = function (event, fn){
       var self = this;
-      function on() {
+
+      function on(){
         self.$off(event, on);
         fn.apply(this, arguments);
       }
+
       on.fn = fn;
       this.$on(event, on);
       return this;
@@ -9234,7 +9258,7 @@ var template = Object.freeze({
      * @param {Function} fn
      */
 
-    Vue.prototype.$off = function (event, fn) {
+    Vue.prototype.$off = function (event, fn){
       var cbs;
       // all
       if (!arguments.length) {
@@ -9280,7 +9304,7 @@ var template = Object.freeze({
      * @return {Boolean} shouldPropagate
      */
 
-    Vue.prototype.$emit = function (event) {
+    Vue.prototype.$emit = function (event){
       var isSource = typeof event === 'string';
       event = isSource ? event : event.name;
       var cbs = this._events[event];
@@ -9291,9 +9315,9 @@ var template = Object.freeze({
         // in #2102: for an inline component listener like <comp @test="doThis">,
         // the propagation handling is somewhat broken. Therefore we
         // need to treat these inline callbacks differently.
-        var hasParentCbs = isSource && cbs.some(function (cb) {
-          return cb._fromParent;
-        });
+        var hasParentCbs = isSource && cbs.some(function (cb){
+            return cb._fromParent;
+          });
         if (hasParentCbs) {
           shouldPropagate = false;
         }
@@ -9316,7 +9340,7 @@ var template = Object.freeze({
      * @param {...*} additional arguments
      */
 
-    Vue.prototype.$broadcast = function (event) {
+    Vue.prototype.$broadcast = function (event){
       var isSource = typeof event === 'string';
       event = isSource ? event : event.name;
       // if no child has registered for this event,
@@ -9346,7 +9370,7 @@ var template = Object.freeze({
      * @param {...*} additional arguments
      */
 
-    Vue.prototype.$dispatch = function (event) {
+    Vue.prototype.$dispatch = function (event){
       var shouldPropagate = this.$emit.apply(this, arguments);
       if (!shouldPropagate) return;
       var parent = this.$parent;
@@ -9372,7 +9396,8 @@ var template = Object.freeze({
      */
 
     var hookRE = /^hook:/;
-    function modifyListenerCount(vm, event, count) {
+
+    function modifyListenerCount(vm, event, count){
       var parent = vm.$parent;
       // hooks do not get broadcasted so no need
       // to do bookkeeping for them
@@ -9384,7 +9409,7 @@ var template = Object.freeze({
     }
   }
 
-  function lifecycleAPI (Vue) {
+  function lifecycleAPI(Vue){
     /**
      * Set instance target element and kick off the compilation
      * process. The passed in `el` can be a selector string, an
@@ -9395,7 +9420,7 @@ var template = Object.freeze({
      * @public
      */
 
-    Vue.prototype.$mount = function (el) {
+    Vue.prototype.$mount = function (el){
       if (this._isCompiled) {
         'development' !== 'production' && warn('$mount() should be called only once.', this);
         return;
@@ -9419,7 +9444,7 @@ var template = Object.freeze({
      * Mark an instance as ready.
      */
 
-    function ready() {
+    function ready(){
       this._isAttached = true;
       this._isReady = true;
       this._callHook('ready');
@@ -9433,7 +9458,7 @@ var template = Object.freeze({
      * @param {Boolean} deferCleanup
      */
 
-    Vue.prototype.$destroy = function (remove, deferCleanup) {
+    Vue.prototype.$destroy = function (remove, deferCleanup){
       this._destroy(remove, deferCleanup);
     };
 
@@ -9448,7 +9473,7 @@ var template = Object.freeze({
      * @return {Function}
      */
 
-    Vue.prototype.$compile = function (el, host, scope, frag) {
+    Vue.prototype.$compile = function (el, host, scope, frag){
       return compile(el, this.$options, true)(this, el, host, scope, frag);
     };
   }
@@ -9467,7 +9492,7 @@ var template = Object.freeze({
    * @public
    */
 
-  function Vue(options) {
+  function Vue(options){
     this._init(options);
   }
 
@@ -9489,7 +9514,7 @@ var template = Object.freeze({
     priority: SLOT,
     params: ['name'],
 
-    bind: function bind() {
+    bind: function bind(){
       // this was resolved during component transclusion
       var name = this.params.name || 'default';
       var content = this.vm._slotContents && this.vm._slotContents[name];
@@ -9500,7 +9525,7 @@ var template = Object.freeze({
       }
     },
 
-    compile: function compile(content, context, host) {
+    compile: function compile(content, context, host){
       if (content && context) {
         if (this.el.hasChildNodes() && content.childNodes.length === 1 && content.childNodes[0].nodeType === 1 && content.childNodes[0].hasAttribute('v-if')) {
           // if the inserted slot has v-if
@@ -9522,11 +9547,11 @@ var template = Object.freeze({
       }
     },
 
-    fallback: function fallback() {
+    fallback: function fallback(){
       this.compile(extractContent(this.el, true), this.vm);
     },
 
-    unbind: function unbind() {
+    unbind: function unbind(){
       if (this.unlink) {
         this.unlink();
       }
@@ -9541,7 +9566,7 @@ var template = Object.freeze({
 
     // watch changes to name for dynamic partials
     paramWatchers: {
-      name: function name(value) {
+      name: function name(value){
         vIf.remove.call(this);
         if (value) {
           this.insert(value);
@@ -9549,13 +9574,13 @@ var template = Object.freeze({
       }
     },
 
-    bind: function bind() {
+    bind: function bind(){
       this.anchor = createAnchor('v-partial');
       replace(this.el, this.anchor);
       this.insert(this.params.name);
     },
 
-    insert: function insert(id) {
+    insert: function insert(id){
       var partial = resolveAsset(this.vm.$options, 'partials', id, true);
       if (partial) {
         this.factory = new FragmentFactory(this.vm, partial);
@@ -9563,7 +9588,7 @@ var template = Object.freeze({
       }
     },
 
-    unbind: function unbind() {
+    unbind: function unbind(){
       if (this.frag) {
         this.frag.destroy();
       }
@@ -9584,7 +9609,7 @@ var template = Object.freeze({
    * @param {Number} offset (Decimal expected)
    */
 
-  function limitBy(arr, n, offset) {
+  function limitBy(arr, n, offset){
     offset = offset ? parseInt(offset, 10) : 0;
     n = toNumber(n);
     return typeof n === 'number' ? arr.slice(offset, offset + n) : arr;
@@ -9598,7 +9623,7 @@ var template = Object.freeze({
    * @param {String} ...dataKeys
    */
 
-  function filterBy(arr, search, delimiter) {
+  function filterBy(arr, search, delimiter){
     arr = convertArray(arr);
     if (search == null) {
       return arr;
@@ -9641,7 +9666,7 @@ var template = Object.freeze({
    * @param {Number} [order]
    */
 
-  function orderBy(arr) {
+  function orderBy(arr){
     var comparator = null;
     var sortKeys = undefined;
     arr = convertArray(arr);
@@ -9662,19 +9687,19 @@ var template = Object.freeze({
       return arr;
     } else if (typeof firstArg === 'function') {
       // custom comparator
-      comparator = function (a, b) {
+      comparator = function (a, b){
         return firstArg(a, b) * order;
       };
     } else {
       // string keys. flatten first
       sortKeys = Array.prototype.concat.apply([], args);
-      comparator = function (a, b, i) {
+      comparator = function (a, b, i){
         i = i || 0;
         return i >= sortKeys.length - 1 ? baseCompare(a, b, i) : baseCompare(a, b, i) || comparator(a, b, i + 1);
       };
     }
 
-    function baseCompare(a, b, sortKeyIndex) {
+    function baseCompare(a, b, sortKeyIndex){
       var sortKey = sortKeys[sortKeyIndex];
       if (sortKey) {
         if (sortKey !== '$key') {
@@ -9698,7 +9723,7 @@ var template = Object.freeze({
    * @param {String} search
    */
 
-  function contains(val, search) {
+  function contains(val, search){
     var i;
     if (isPlainObject(val)) {
       var keys = Object.keys(val);
@@ -9736,10 +9761,10 @@ var template = Object.freeze({
      */
 
     json: {
-      read: function read(value, indent) {
+      read: function read(value, indent){
         return typeof value === 'string' ? value : JSON.stringify(value, null, Number(indent) || 2);
       },
-      write: function write(value) {
+      write: function write(value){
         try {
           return JSON.parse(value);
         } catch (e) {
@@ -9752,7 +9777,7 @@ var template = Object.freeze({
      * 'abc' => 'Abc'
      */
 
-    capitalize: function capitalize(value) {
+    capitalize: function capitalize(value){
       if (!value && value !== 0) return '';
       value = value.toString();
       return value.charAt(0).toUpperCase() + value.slice(1);
@@ -9762,7 +9787,7 @@ var template = Object.freeze({
      * 'abc' => 'ABC'
      */
 
-    uppercase: function uppercase(value) {
+    uppercase: function uppercase(value){
       return value || value === 0 ? value.toString().toUpperCase() : '';
     },
 
@@ -9770,7 +9795,7 @@ var template = Object.freeze({
      * 'AbC' => 'abc'
      */
 
-    lowercase: function lowercase(value) {
+    lowercase: function lowercase(value){
       return value || value === 0 ? value.toString().toLowerCase() : '';
     },
 
@@ -9781,7 +9806,7 @@ var template = Object.freeze({
      * @param {Number} decimals Decimal places
      */
 
-    currency: function currency(value, _currency, decimals) {
+    currency: function currency(value, _currency, decimals){
       value = parseFloat(value);
       if (!isFinite(value) || !value && value !== 0) return '';
       _currency = _currency != null ? _currency : '$';
@@ -9808,7 +9833,7 @@ var template = Object.freeze({
      *  e.g. ['single', 'double', 'triple', 'multiple']
      */
 
-    pluralize: function pluralize(value) {
+    pluralize: function pluralize(value){
       var args = toArray(arguments, 1);
       return args.length > 1 ? args[value % 10 - 1] || args[args.length - 1] : args[0] + (value === 1 ? '' : 's');
     },
@@ -9821,7 +9846,7 @@ var template = Object.freeze({
      * @return {Function}
      */
 
-    debounce: function debounce(handler, delay) {
+    debounce: function debounce(handler, delay){
       if (!handler) return;
       if (!delay) {
         delay = 300;
@@ -9830,7 +9855,7 @@ var template = Object.freeze({
     }
   };
 
-  function installGlobalAPI (Vue) {
+  function installGlobalAPI(Vue){
     /**
      * Vue and every constructor that extends Vue has an
      * associated options object, which can be accessed during
@@ -9890,7 +9915,7 @@ var template = Object.freeze({
      * @param {Object} extendOptions
      */
 
-    Vue.extend = function (extendOptions) {
+    Vue.extend = function (extendOptions){
       extendOptions = extendOptions || {};
       var Super = this;
       var isFirstExtend = Super.cid === 0;
@@ -9914,7 +9939,7 @@ var template = Object.freeze({
       Sub.extend = Super.extend;
       // create asset registers, so extended classes
       // can have their private assets too.
-      config._assetTypes.forEach(function (type) {
+      config._assetTypes.forEach(function (type){
         Sub[type] = Super[type];
       });
       // enable recursive self-lookup
@@ -9937,7 +9962,7 @@ var template = Object.freeze({
      * @return {Function}
      */
 
-    function createClass(name) {
+    function createClass(name){
       /* eslint-disable no-new-func */
       return new Function('return function ' + classify(name) + ' (options) { this._init(options) }')();
       /* eslint-enable no-new-func */
@@ -9949,7 +9974,7 @@ var template = Object.freeze({
      * @param {Object} plugin
      */
 
-    Vue.use = function (plugin) {
+    Vue.use = function (plugin){
       /* istanbul ignore if */
       if (plugin.installed) {
         return;
@@ -9971,7 +9996,7 @@ var template = Object.freeze({
      * options.
      */
 
-    Vue.mixin = function (mixin) {
+    Vue.mixin = function (mixin){
       Vue.options = mergeOptions(Vue.options, mixin);
     };
 
@@ -9983,8 +10008,8 @@ var template = Object.freeze({
      * @param {*} definition
      */
 
-    config._assetTypes.forEach(function (type) {
-      Vue[type] = function (id, definition) {
+    config._assetTypes.forEach(function (type){
+      Vue[type] = function (id, definition){
         if (!definition) {
           return this.options[type + 's'][id];
         } else {
@@ -10014,7 +10039,7 @@ var template = Object.freeze({
 
   // devtools global hook
   /* istanbul ignore next */
-  setTimeout(function () {
+  setTimeout(function (){
     if (config.devtools) {
       if (devtools) {
         devtools.emit('init', Vue);

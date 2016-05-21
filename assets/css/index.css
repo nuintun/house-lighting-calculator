@@ -50,3 +50,7 @@ input[type=text]:focus {
   background-color: #5cb85c;
   border-color: #4cae4c;
 }
+.ui-submit-panel {
+  padding-left: 126px;
+  padding-top: 33px;
+}

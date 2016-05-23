@@ -50,6 +50,9 @@
             var h = this.blockFloor * this.blockFloorHeight - this.floor * this.floorHeight;
             this.minDistance = Number((h / tan).toFixed(2));
           }
+        },
+        created: function (){
+          this.lighting();
         }
       });
     </script>

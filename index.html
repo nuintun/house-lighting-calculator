@@ -32,6 +32,10 @@
       </div>
     </div>
     <script type="text/javascript">
+      if (!window.console) {
+        window.console = { log: function (){} };
+      }
+
       var house = new Vue({
         el: '#house',
         data: {

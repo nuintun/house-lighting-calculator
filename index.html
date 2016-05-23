@@ -50,6 +50,10 @@
             var tan = Math.tan((90 - 23.26 - this.lat) * 2 * Math.PI / 360);
             var h = this.blockFloor * this.blockFloorHeight - this.floor * this.floorHeight;
 
+            console.log('最小入射角度', Math.atan(this.distance / h) * 360 / (2 * Math.PI));
+            console.log('夏至入射角度', 90 + 23.26 - this.lat);
+            console.log('冬至入射角度', 90 - 23.26 - this.lat);
+
             this.minDistance = Math.max(0, Number((h / tan).toFixed(2)));
           }
         },

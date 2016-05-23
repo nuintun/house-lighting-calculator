@@ -57,11 +57,6 @@
             tan = Math.tan(winterAngle * 2 * Math.PI / 360);
             this.winterDistance = Math.max(0, Number((h / tan).toFixed(2)));
             this.darkDays = Math.max(0, (2 * ((limitAngle - winterAngle) / 3.92) * 15)).toFixed(2);
-
-            console.log('夏至入射角度：', summerAngle);
-            console.log('冬至入射角度：', winterAngle);
-            console.log('采光要求最小入射角度：', limitAngle);
-            console.log('全年有%s天无法见到阳光！', this.darkDays);
           }
         },
         created: function (){

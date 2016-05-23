@@ -52,12 +52,12 @@
 
             var winter = 90 - 23.26 - this.lat;
             var summer = 90 + 23.26 - this.lat;
-            var deg = Math.atan(this.distance / h) * 360 / (2 * Math.PI);
+            var deg = Math.atan(h / this.distance) * 360 / (2 * Math.PI);
 
-            console.log('最小入射角度', deg);
-            console.log('夏至入射角度', summer);
-            console.log('冬至入射角度', winter);
-            console.log('冬至入射角度', 2 * ((deg - winter) / 3.92) * 15);
+            console.log('夏至入射角度：', summer);
+            console.log('冬至入射角度：', winter);
+            console.log('采光要求最小入射角度：', deg);
+            console.log('全年有%s天无法见到阳光！', Math.max(0, (2 * ((deg - winter) / 3.92) * 15)).toFixed(2));
 
             this.minDistance = Math.max(0, Number((h / tan).toFixed(2)));
           }

@@ -3,6 +3,7 @@ body, div {
 }
 body {
   text-align: center;
+  font-family: "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
 }
 .ui-form {
   margin: 66px auto;

@@ -14,29 +14,41 @@
     <!--<div>即90° — 23.5° — 你所在城市纬度，如果冬至日这天的太阳直射角度大于夹角 a 的话，采光就没有问题，</div>-->
     <!--<div>因为冬至日这天是我们国家一年中太阳直射角度最小的时候，冬至日的直射角度都大于 a，那全年采光没有问题。</div>-->
     <div id="house" class="ui-form">
-      <div class="ui-form-item"><label>遮阳楼总层数： </label><input type="text" autofocus/></div>
-      <div class="ui-form-item"><label>遮阳楼每层高： </label><input type="text"/> 米</div>
-      <div class="ui-form-item"><label>您居住在几层： </label><input type="text"/></div>
-      <div class="ui-form-item"><label>您的楼每层高： </label><input type="text"/> 米</div>
-      <div class="ui-form-item"><label>所在城市维度： </label><input type="text"/></div>
-      <div class="ui-form-item"><label>与遮阳楼间距： </label><input type="text"/> 米</div>
+      <div class="ui-form-item"><label>遮阳楼总层数： </label><input type="text" v-model="blockFloor" autofocus/></div>
+      <div class="ui-form-item"><label>遮阳楼每层高： </label><input type="text" v-model="blockFloorHeight"/> 米</div>
+      <div class="ui-form-item"><label>您居住在几层： </label><input type="text" v-model="floor"/></div>
+      <div class="ui-form-item"><label>您的楼每层高： </label><input type="text" v-model="floorHeight"/> 米</div>
+      <div class="ui-form-item"><label>所在城市维度： </label><input type="text" v-model="lat"/></div>
+      <div class="ui-form-item"><label>与遮阳楼间距： </label><input type="text" v-model="distance"/> 米</div>
       <!-- Math.atan(1) * 360 / (2 * Math.PI) -->
       <!--(遮挡楼层数 * 遮挡楼层高 - 居住楼层 * 居住楼层高) / Math.tan((90 - 23.5 - 所在地维度) * 2 * Math.PI / 360)-->
       <!--(33 * 3 - 18 * 3) / Math.tan((90 - 23.5 - 32.13) * 2 * Math.PI / 360)-->
       <div class="ui-form-item ui-submit-panel">
         <input type="submit" class="ui-button ui-button-success" @click="lighting" value="计算采光数据"/>
       </div>
-      <div class="ui-result">{{result}}</div>
+      <div class="ui-result">
+        <div>实际楼间距：{{distance}}米</div>
+        <div>冬至采光最小楼间距：{{minDistance}}米</div>
+        <div>{{distance < minDistance ? '您的楼房在冬至时无法见到阳光！' : '您的楼房采光充足！'}}</div>
+      </div>
     </div>
     <script type="text/javascript">
       var house = new Vue({
         el: '#house',
         data: {
-          result: '采光计算结果测试'
+          lat: 32.146522,
+          distance: 65,
+          floor: 11,
+          floorHeight: 3,
+          blockFloor: 33,
+          blockFloorHeight: 3,
+          minDistance: 0
         },
         methods: {
           lighting: function (){
-            console.log('lighting');
+            var tan = Math.tan((90 - 23.5 - this.lat) * 2 * Math.PI / 360);
+            var h = this.blockFloor * this.blockFloorHeight - this.floor * this.floorHeight;
+            this.minDistance = (h / tan).toFixed(2);
           }
         }
       });

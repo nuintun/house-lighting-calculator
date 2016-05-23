@@ -64,4 +64,5 @@ input[type=text]:focus {
 }
 .ui-result {
   padding: 30px 0;
+  line-height: 1.5;
 }

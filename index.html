@@ -46,7 +46,7 @@
         },
         methods: {
           lighting: function (){
-            // 90 + 23.26 - this.lat
+            // 90 + 23.26 - this.lat 夏至太阳角度
             var tan = Math.tan((90 - 23.26 - this.lat) * 2 * Math.PI / 360);
             var h = this.blockFloor * this.blockFloorHeight - this.floor * this.floorHeight;
 
